@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Waddame
+
+  Created by Leandro Setti de Almeida on 2022-07-15.
+  
+*/
+
+"welcome" = "Welcome!";
+"username" = "User name";
+"password" = "Password";
+"login" = "LOGIN";

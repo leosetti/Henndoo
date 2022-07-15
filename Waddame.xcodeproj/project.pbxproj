@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */; };
+		6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D512881F31F00B53EE7 /* ContentView.swift */; };
+		6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D532881F32000B53EE7 /* Assets.xcassets */; };
+		6FE09D572881F32000B53EE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D562881F32000B53EE7 /* Preview Assets.xcassets */; };
+		6FE09D612881F32100B53EE7 /* WaddameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D602881F32100B53EE7 /* WaddameTests.swift */; };
+		6FE09D6B2881F32100B53EE7 /* WaddameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D6A2881F32100B53EE7 /* WaddameUITests.swift */; };
+		6FE09D6D2881F32100B53EE7 /* WaddameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D6C2881F32100B53EE7 /* WaddameUITestsLaunchTests.swift */; };
+		6FE09D7B2881FB2800B53EE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D7D2881FB2800B53EE7 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6FE09D5D2881F32100B53EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FE09D442881F31F00B53EE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FE09D4B2881F31F00B53EE7;
+			remoteInfo = Waddame;
+		};
+		6FE09D672881F32100B53EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FE09D442881F31F00B53EE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FE09D4B2881F31F00B53EE7;
+			remoteInfo = Waddame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6FE09D4C2881F31F00B53EE7 /* Waddame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waddame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameApp.swift; sourceTree = "<group>"; };
+		6FE09D512881F31F00B53EE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6FE09D532881F32000B53EE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6FE09D562881F32000B53EE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6FE09D5C2881F32100B53EE7 /* WaddameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaddameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FE09D602881F32100B53EE7 /* WaddameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameTests.swift; sourceTree = "<group>"; };
+		6FE09D662881F32100B53EE7 /* WaddameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaddameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FE09D6A2881F32100B53EE7 /* WaddameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameUITests.swift; sourceTree = "<group>"; };
+		6FE09D6C2881F32100B53EE7 /* WaddameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6FE09D7C2881FB2800B53EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FE09D7E2881FB2D00B53EE7 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6FE09D492881F31F00B53EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D592881F32100B53EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D632881F32100B53EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6FE09D432881F31F00B53EE7 = {
+			isa = PBXGroup;
+			children = (
+				6FE09D4E2881F31F00B53EE7 /* Waddame */,
+				6FE09D5F2881F32100B53EE7 /* WaddameTests */,
+				6FE09D692881F32100B53EE7 /* WaddameUITests */,
+				6FE09D4D2881F31F00B53EE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6FE09D4D2881F31F00B53EE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FE09D4C2881F31F00B53EE7 /* Waddame.app */,
+				6FE09D5C2881F32100B53EE7 /* WaddameTests.xctest */,
+				6FE09D662881F32100B53EE7 /* WaddameUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6FE09D4E2881F31F00B53EE7 /* Waddame */ = {
+			isa = PBXGroup;
+			children = (
+				6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */,
+				6FE09D512881F31F00B53EE7 /* ContentView.swift */,
+				6FE09D532881F32000B53EE7 /* Assets.xcassets */,
+				6FE09D552881F32000B53EE7 /* Preview Content */,
+				6FE09D7D2881FB2800B53EE7 /* Localizable.strings */,
+			);
+			path = Waddame;
+			sourceTree = "<group>";
+		};
+		6FE09D552881F32000B53EE7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6FE09D562881F32000B53EE7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6FE09D5F2881F32100B53EE7 /* WaddameTests */ = {
+			isa = PBXGroup;
+			children = (
+				6FE09D602881F32100B53EE7 /* WaddameTests.swift */,
+			);
+			path = WaddameTests;
+			sourceTree = "<group>";
+		};
+		6FE09D692881F32100B53EE7 /* WaddameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6FE09D6A2881F32100B53EE7 /* WaddameUITests.swift */,
+				6FE09D6C2881F32100B53EE7 /* WaddameUITestsLaunchTests.swift */,
+			);
+			path = WaddameUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6FE09D4B2881F31F00B53EE7 /* Waddame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FE09D702881F32100B53EE7 /* Build configuration list for PBXNativeTarget "Waddame" */;
+			buildPhases = (
+				6FE09D482881F31F00B53EE7 /* Sources */,
+				6FE09D492881F31F00B53EE7 /* Frameworks */,
+				6FE09D4A2881F31F00B53EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Waddame;
+			productName = Waddame;
+			productReference = 6FE09D4C2881F31F00B53EE7 /* Waddame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6FE09D5B2881F32100B53EE7 /* WaddameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FE09D732881F32100B53EE7 /* Build configuration list for PBXNativeTarget "WaddameTests" */;
+			buildPhases = (
+				6FE09D582881F32100B53EE7 /* Sources */,
+				6FE09D592881F32100B53EE7 /* Frameworks */,
+				6FE09D5A2881F32100B53EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6FE09D5E2881F32100B53EE7 /* PBXTargetDependency */,
+			);
+			name = WaddameTests;
+			productName = WaddameTests;
+			productReference = 6FE09D5C2881F32100B53EE7 /* WaddameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6FE09D652881F32100B53EE7 /* WaddameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FE09D762881F32100B53EE7 /* Build configuration list for PBXNativeTarget "WaddameUITests" */;
+			buildPhases = (
+				6FE09D622881F32100B53EE7 /* Sources */,
+				6FE09D632881F32100B53EE7 /* Frameworks */,
+				6FE09D642881F32100B53EE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6FE09D682881F32100B53EE7 /* PBXTargetDependency */,
+			);
+			name = WaddameUITests;
+			productName = WaddameUITests;
+			productReference = 6FE09D662881F32100B53EE7 /* WaddameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6FE09D442881F31F00B53EE7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					6FE09D4B2881F31F00B53EE7 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					6FE09D5B2881F32100B53EE7 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 6FE09D4B2881F31F00B53EE7;
+					};
+					6FE09D652881F32100B53EE7 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 6FE09D4B2881F31F00B53EE7;
+					};
+				};
+			};
+			buildConfigurationList = 6FE09D472881F31F00B53EE7 /* Build configuration list for PBXProject "Waddame" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"fr-CA",
+			);
+			mainGroup = 6FE09D432881F31F00B53EE7;
+			productRefGroup = 6FE09D4D2881F31F00B53EE7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6FE09D4B2881F31F00B53EE7 /* Waddame */,
+				6FE09D5B2881F32100B53EE7 /* WaddameTests */,
+				6FE09D652881F32100B53EE7 /* WaddameUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6FE09D4A2881F31F00B53EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FE09D572881F32000B53EE7 /* Preview Assets.xcassets in Resources */,
+				6FE09D7B2881FB2800B53EE7 /* Localizable.strings in Resources */,
+				6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D5A2881F32100B53EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D642881F32100B53EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FE09D482881F31F00B53EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */,
+				6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D582881F32100B53EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FE09D612881F32100B53EE7 /* WaddameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FE09D622881F32100B53EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FE09D6D2881F32100B53EE7 /* WaddameUITestsLaunchTests.swift in Sources */,
+				6FE09D6B2881F32100B53EE7 /* WaddameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6FE09D5E2881F32100B53EE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FE09D4B2881F31F00B53EE7 /* Waddame */;
+			targetProxy = 6FE09D5D2881F32100B53EE7 /* PBXContainerItemProxy */;
+		};
+		6FE09D682881F32100B53EE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FE09D4B2881F31F00B53EE7 /* Waddame */;
+			targetProxy = 6FE09D672881F32100B53EE7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6FE09D7D2881FB2800B53EE7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FE09D7C2881FB2800B53EE7 /* en */,
+				6FE09D7E2881FB2D00B53EE7 /* fr-CA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6FE09D6E2881F32100B53EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6FE09D6F2881F32100B53EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6FE09D712881F32100B53EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Waddame/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.Waddame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6FE09D722881F32100B53EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Waddame/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.Waddame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6FE09D742881F32100B53EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.WaddameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waddame.app/Waddame";
+			};
+			name = Debug;
+		};
+		6FE09D752881F32100B53EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.WaddameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waddame.app/Waddame";
+			};
+			name = Release;
+		};
+		6FE09D772881F32100B53EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.WaddameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Waddame;
+			};
+			name = Debug;
+		};
+		6FE09D782881F32100B53EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leosetti.WaddameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Waddame;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6FE09D472881F31F00B53EE7 /* Build configuration list for PBXProject "Waddame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FE09D6E2881F32100B53EE7 /* Debug */,
+				6FE09D6F2881F32100B53EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FE09D702881F32100B53EE7 /* Build configuration list for PBXNativeTarget "Waddame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FE09D712881F32100B53EE7 /* Debug */,
+				6FE09D722881F32100B53EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FE09D732881F32100B53EE7 /* Build configuration list for PBXNativeTarget "WaddameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FE09D742881F32100B53EE7 /* Debug */,
+				6FE09D752881F32100B53EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FE09D762881F32100B53EE7 /* Build configuration list for PBXNativeTarget "WaddameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FE09D772881F32100B53EE7 /* Debug */,
+				6FE09D782881F32100B53EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6FE09D442881F31F00B53EE7 /* Project object */;
+}

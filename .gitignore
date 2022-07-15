@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+config/localdev.json
+.env
+debug.log
+error.log
+info.log
+startup.log
+stripe.log
+uncaughtExceptions.log
