@@ -9,4 +9,12 @@
 "welcome" = "Bienvenue!";
 "username" = "Nom d'usager";
 "password" = "Mot de passe";
-"login" = "CONNEXION";
+"email" = "Courriel";
+"login" = "Connexion";
+"login_action" = "Se connecter";
+"signup" = "Inscription";
+"signup_action" = "S'inscrire";
+
+"my_account" = "Mon compte";
+"home" = "Accueil";
+"profile" = "Profil";

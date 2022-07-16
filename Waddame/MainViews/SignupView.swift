@@ -1,34 +1,30 @@
 //
-//  ContentView.swift
+//  SignupView.swift
 //  Waddame
 //
-//  Created by Leandro Setti de Almeida on 2022-07-15.
+//  Created by Leandro Setti de Almeida on 2022-07-16.
 //
 
 import SwiftUI
 
-let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
-struct ContentView: View {
-
-    
+struct SignupView: View {
     var body: some View {
         VStack {
-            WelcomeText(label: "welcome")
-            WelcomeImage()
-            LoginForm(unamelabel: "username", pwdlabel: "password")
+            SignupText()
+            SignupForm()
         }
         .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SignupView()
     }
 }
 
-struct WelcomeText: View {
-    var label: LocalizedStringKey
+struct SignupText: View {
+    var label: LocalizedStringKey = "signup"
     var body: some View {
         Text(label)
             .font(.largeTitle)
@@ -37,49 +33,44 @@ struct WelcomeText: View {
     }
 }
 
-struct WelcomeImage: View {
-    var body: some View {
-        Image("userImage")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
-            .clipped()
-            .cornerRadius(150)
-            .padding(.bottom, 75)
-    }
-}
-
-struct LoginForm: View {
+struct SignupForm: View {
     @State var username: String = ""
     @State var password: String = ""
+    @State var email: String = ""
     
-    var unamelabel: LocalizedStringKey
-    var pwdlabel: LocalizedStringKey
+    var unamelabel: LocalizedStringKey = "username"
+    var pwdlabel: LocalizedStringKey = "password"
+    var emaillabel: LocalizedStringKey = "email"
     
-
     var body: some View {
+        TextField(emaillabel, text: $email)
+            .padding()
+            .background(lightGreyColor)
+            .cornerRadius(5.0)
+            .padding(.bottom, 10)
         TextField(unamelabel, text: $username)
             .padding()
             .background(lightGreyColor)
             .cornerRadius(5.0)
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
         SecureField(pwdlabel, text: $password)
                         .padding()
                         .background(lightGreyColor)
                         .cornerRadius(5.0)
                         .padding(.bottom, 20)
         Button(action: {print("Button tapped")}) {
-            LoginButtonContent(loginlabel: "login")
+            SignupButtonContent()
         }
         
     }
 }
 
-struct LoginButtonContent: View {
-    var loginlabel: LocalizedStringKey
+struct SignupButtonContent: View {
+    var loginlabel: LocalizedStringKey = "signup_action"
     
     var body: some View {
         Text(loginlabel)
+            .textCase(.uppercase)
             .font(.headline)
             .foregroundColor(.white)
             .padding()
