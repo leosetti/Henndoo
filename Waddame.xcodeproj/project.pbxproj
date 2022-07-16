@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABB42C2882D7E600C1C042 /* Cache.swift */; };
 		6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */; };
 		6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D512881F31F00B53EE7 /* ContentView.swift */; };
 		6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D532881F32000B53EE7 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FABB42C2882D7E600C1C042 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		6FE09D4C2881F31F00B53EE7 /* Waddame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waddame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameApp.swift; sourceTree = "<group>"; };
 		6FE09D512881F31F00B53EE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FABB42B2882D7D000C1C042 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				6FABB42C2882D7E600C1C042 /* Cache.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		6FE09D432881F31F00B53EE7 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		6FE09D4E2881F31F00B53EE7 /* Waddame */ = {
 			isa = PBXGroup;
 			children = (
+				6FABB42B2882D7D000C1C042 /* Cache */,
 				6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */,
 				6FE09D512881F31F00B53EE7 /* ContentView.swift */,
 				6FE09D532881F32000B53EE7 /* Assets.xcassets */,
@@ -264,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */,
+				6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */,
 				6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
