@@ -7,15 +7,19 @@
 
 import SwiftUI
 
-
 struct LoginView: View {
+    var signuplabel: LocalizedStringKey = "signup"
+    
     var body: some View {
-        VStack {
-            LoginText()
-            WelcomeImage()
-            LoginForm()
+        NavigationView {
+            VStack {
+                LoginText()
+                WelcomeImage()
+                LoginForm()
+                NavView(content: {SignupView()}, text: signuplabel)
+            }
+           
         }
-        .padding()
     }
 }
 

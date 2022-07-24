@@ -14,6 +14,7 @@ struct SignupView: View {
             SignupForm()
         }
         .padding()
+
     }
 }
 
