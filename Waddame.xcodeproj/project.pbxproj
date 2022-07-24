@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44C606CD288C811900BCF709 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C606CC288C811900BCF709 /* User.swift */; };
+		44C606CF288C899100BCF709 /* WrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C606CE288C899100BCF709 /* WrapperView.swift */; };
+		44C606D2288C914500BCF709 /* UserLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C606D1288C914400BCF709 /* UserLoader.swift */; };
 		44F7434D2883284E0033E9DB /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7434C2883284E0033E9DB /* Variables.swift */; };
 		44F7434F288343B70033E9DB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7434E288343B70033E9DB /* HomeView.swift */; };
 		44F74351288345510033E9DB /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F74350288345510033E9DB /* SignupView.swift */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44C606CC288C811900BCF709 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		44C606CE288C899100BCF709 /* WrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperView.swift; sourceTree = "<group>"; };
+		44C606D1288C914400BCF709 /* UserLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoader.swift; sourceTree = "<group>"; };
 		44F7434C2883284E0033E9DB /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		44F7434E288343B70033E9DB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		44F74350288345510033E9DB /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
@@ -86,6 +92,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44C606CB288C810300BCF709 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44C606CC288C811900BCF709 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44C606D0288C912700BCF709 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				44C606D1288C914400BCF709 /* UserLoader.swift */,
+			);
+			path = Loaders;
+			sourceTree = "<group>";
+		};
 		44F7435628834ED00033E9DB /* NestedViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +123,7 @@
 				44F74350288345510033E9DB /* SignupView.swift */,
 				6FE09D512881F31F00B53EE7 /* LoginView.swift */,
 				44F7435428834BD90033E9DB /* MainView.swift */,
+				44C606CE288C899100BCF709 /* WrapperView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -136,6 +159,8 @@
 		6FE09D4E2881F31F00B53EE7 /* Waddame */ = {
 			isa = PBXGroup;
 			children = (
+				44C606D0288C912700BCF709 /* Loaders */,
+				44C606CB288C810300BCF709 /* Models */,
 				44F7435728834EFC0033E9DB /* MainViews */,
 				44F7435628834ED00033E9DB /* NestedViews */,
 				6FABB42B2882D7D000C1C042 /* Cache */,
@@ -306,13 +331,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				44F7435328834AB00033E9DB /* AccountView.swift in Sources */,
+				44C606CD288C811900BCF709 /* User.swift in Sources */,
 				44F7435528834BD90033E9DB /* MainView.swift in Sources */,
 				44F7434D2883284E0033E9DB /* Variables.swift in Sources */,
 				6FE09D522881F31F00B53EE7 /* LoginView.swift in Sources */,
 				44F7434F288343B70033E9DB /* HomeView.swift in Sources */,
 				6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */,
 				6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */,
+				44C606CF288C899100BCF709 /* WrapperView.swift in Sources */,
 				44F74351288345510033E9DB /* SignupView.swift in Sources */,
+				44C606D2288C914500BCF709 /* UserLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Waddame/Preview Content\"";
+				DEVELOPMENT_TEAM = TQXNP64W7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -512,6 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Waddame/Preview Content\"";
+				DEVELOPMENT_TEAM = TQXNP64W7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
