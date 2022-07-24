@@ -34,6 +34,7 @@ struct WrapperView: View {
                 handleActive()
             }
         }
+        .environmentObject(userLoader)
     }
     
     private func handleActive() {

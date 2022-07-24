@@ -43,6 +43,10 @@ struct SignupForm: View {
     var pwdlabel: LocalizedStringKey = "password"
     var emaillabel: LocalizedStringKey = "email"
     
+    @State var user:User? = nil
+    @State private var t1: String = "Initial"
+    @EnvironmentObject var userManager: UserLoader
+        
     var body: some View {
         TextField(emaillabel, text: $email)
             .padding()
@@ -59,7 +63,24 @@ struct SignupForm: View {
                         .background(lightGreyColor)
                         .cornerRadius(5.0)
                         .padding(.bottom, 20)
-        Button(action: {print("Button tapped")}) {
+        
+        Text(t1)
+        
+        Button(action: {
+            userManager.createUser(withUsername: username, withEmail: email, withPassword: password, then: {result in
+                if case .success = result {
+                    DispatchQueue.main.async() {
+                        t1 = "Success!"
+                    }
+                }
+                if case .failure = result {
+                    DispatchQueue.main.async() {
+                        t1 = "Error!!"
+                    }
+                }
+            })
+            
+        }) {
             SignupButtonContent()
         }
         
