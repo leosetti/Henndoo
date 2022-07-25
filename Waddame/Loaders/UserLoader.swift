@@ -45,34 +45,23 @@ class UserLoader: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            print("-----> data: \(String(describing: data))")
-            print("-----> error: \(String(describing: error))")
+            //print("-----> data: \(String(describing: data))")
+            //print("-----> error: \(String(describing: error))")
               
               guard let data = data, error == nil else {
-                  print(error?.localizedDescription ?? "No data")
+                  //print(error?.localizedDescription ?? "No data")
                   handler(.failure(UserError.fetching))
                   return
               }
 
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-              print("-----1> responseJSON: \(String(describing: responseJSON))")
-            
-            
-            if let userObj = responseJSON?["user"] as? [String: Any] {
-                  print("-----2> responseJSON: \(userObj)")
+            do {
+              let userModel = try JSONDecoder().decode(User.self, from: data)
+                handler(.success(userModel))
                 
-                
-                let userToReturn: [Any]  = [
-                    [
-                         "_id": userObj._id,
-                         "username": userObj.username,
-                         "email": userObj.email
-                    ]
-                ]
-                
-                  //handler(.success(userObj))
-            }else{
+            } catch let jsonError as NSError {
+                //print("JSON decode failed: \(jsonError.localizedDescription)")
                 handler(.failure(UserError.fetching))
+                return
             }
         }
           
