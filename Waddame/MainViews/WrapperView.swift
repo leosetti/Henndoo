@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WrapperView: View {
+    @State var currentPage: Page = .page1
+    @StateObject var viewRouter: ViewRouter
+    
     @Environment(\.scenePhase) var scenePhase
     @StateObject var userLoader = UserLoader()
     @State private var logged: Bool?
@@ -17,11 +20,11 @@ struct WrapperView: View {
     var body: some View {
         Group {
             if let loggedIn: Bool = logged {
-                if loggedIn {
-                    MainView()
-                }
-                else {
-                    LoginView()
+                switch viewRouter.currentPage {
+                case .page1:
+                    LoginView(viewRouter: viewRouter)
+                case .page2:
+                    MainView(viewRouter: viewRouter)
                 }
             }
             else {
@@ -62,7 +65,7 @@ struct WrapperView: View {
 
 struct WrapperView_Previews: PreviewProvider {
     static var previews: some View {
-        WrapperView()
+        WrapperView(viewRouter: ViewRouter())
     }
 }
 

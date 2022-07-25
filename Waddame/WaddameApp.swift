@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct WaddameApp: App {
+    @StateObject var viewRouter = ViewRouter()
+    
     var body: some Scene {
         WindowGroup {
-            WrapperView()
+            WrapperView(viewRouter: viewRouter)
         }
     }
 }

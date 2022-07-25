@@ -54,15 +54,28 @@ class UserLoader: ObservableObject {
                   return
               }
 
-              let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
               print("-----1> responseJSON: \(String(describing: responseJSON))")
             
-              if let responseJSON = responseJSON as? User {
-                  print("-----2> responseJSON: \(responseJSON)")
-                  handler(.success(responseJSON))
-              }
-          }
+            
+            if let userObj = responseJSON?["user"] as? [String: Any] {
+                  print("-----2> responseJSON: \(userObj)")
+                
+                
+                let userToReturn: [Any]  = [
+                    [
+                         "_id": userObj._id,
+                         "username": userObj.username,
+                         "email": userObj.email
+                    ]
+                ]
+                
+                  //handler(.success(userObj))
+            }else{
+                handler(.failure(UserError.fetching))
+            }
+        }
           
-          task.resume()
+        task.resume()
     }
 }

@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct SignupView: View {
+    @StateObject var viewRouter: ViewRouter
+    @State var logged: Bool = false
+    
     var body: some View {
-        VStack {
-            SignupText()
-            SignupForm()
-        }
-        .padding()
-
+        
+            switch viewRouter.currentPage {
+            case .page1:
+                VStack {
+                    SignupText()
+                    SignupForm(viewRouter: viewRouter)
+                }
+                .padding()
+            case .page2:
+                MainView(viewRouter: viewRouter)
+            }
+        
     }
 }
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        SignupView(viewRouter:ViewRouter())
     }
 }
 
@@ -35,6 +44,8 @@ struct SignupText: View {
 }
 
 struct SignupForm: View {
+    @StateObject var viewRouter: ViewRouter
+    
     @State var username: String = ""
     @State var password: String = ""
     @State var email: String = ""
@@ -44,7 +55,7 @@ struct SignupForm: View {
     var emaillabel: LocalizedStringKey = "email"
     
     @State var user:User? = nil
-    @State private var t1: String = "Initial"
+    @State private var t1: String = ""
     @EnvironmentObject var userManager: UserLoader
         
     var body: some View {
@@ -69,9 +80,9 @@ struct SignupForm: View {
         Button(action: {
             userManager.createUser(withUsername: username, withEmail: email, withPassword: password, then: {result in
                 if case .success = result {
-                    DispatchQueue.main.async() {
-                        t1 = "Success!"
-                    }
+                    //DispatchQueue.main.async() {
+                        viewRouter.currentPage = .page2
+                    //}
                 }
                 if case .failure = result {
                     DispatchQueue.main.async() {

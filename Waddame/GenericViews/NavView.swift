@@ -22,6 +22,6 @@ struct NavView<Content: View>: View {
 struct NavView_Previews: PreviewProvider {
     static var previews: some View {
         let signuplabel: LocalizedStringKey = "signup"
-        NavView(content: {SignupView()}, text: signuplabel)
+        NavView(content: {SignupView(viewRouter: ViewRouter())}, text: signuplabel)
     }
 }
