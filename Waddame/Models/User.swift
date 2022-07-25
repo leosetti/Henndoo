@@ -17,8 +17,7 @@ import Foundation
 
 // MARK: - User
 struct User: Codable {
-    let username, email: String
-    let _id: UUID
+    let id, username, email: String
 }
 
 // MARK: - Helper functions for creating encoders and decoders

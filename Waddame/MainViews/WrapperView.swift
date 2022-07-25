@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WrapperView: View {
-    @State var currentPage: Page = .page1
     @StateObject var viewRouter: ViewRouter
     
     @Environment(\.scenePhase) var scenePhase
@@ -19,11 +18,11 @@ struct WrapperView: View {
     
     var body: some View {
         Group {
-            if let loggedIn: Bool = logged {
-                switch viewRouter.currentPage {
-                case .page1:
+            if let _: Bool = logged {
+                switch viewRouter.currentScreen {
+                case .login:
                     LoginView(viewRouter: viewRouter)
-                case .page2:
+                case .main:
                     MainView(viewRouter: viewRouter)
                 }
             }

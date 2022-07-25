@@ -12,18 +12,10 @@ struct SignupView: View {
     @State var logged: Bool = false
     
     var body: some View {
-        
-            switch viewRouter.currentPage {
-            case .page1:
-                VStack {
-                    SignupText()
-                    SignupForm(viewRouter: viewRouter)
-                }
-                .padding()
-            case .page2:
-                MainView(viewRouter: viewRouter)
-            }
-        
+        VStack {
+            SignupText()
+            SignupForm(viewRouter: viewRouter)
+        }
     }
 }
 
@@ -80,9 +72,7 @@ struct SignupForm: View {
         Button(action: {
             userManager.createUser(withUsername: username, withEmail: email, withPassword: password, then: {result in
                 if case .success = result {
-                    //DispatchQueue.main.async() {
-                        viewRouter.currentPage = .page2
-                    //}
+                    viewRouter.currentScreen = .main
                 }
                 if case .failure = result {
                     DispatchQueue.main.async() {

@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-enum Page {
-    case page1
-    case page2
+enum Screen {
+    case login
+    case main
 }
 
 class ViewRouter: ObservableObject {
-    @Published var currentPage: Page = .page1
+    @Published var currentScreen: Screen = .login
     
 }
