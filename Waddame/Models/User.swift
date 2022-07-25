@@ -17,7 +17,7 @@ import Foundation
 
 // MARK: - User
 struct User: Codable {
-    let username, email, password: String
+    let username, email: String
     let _id: UUID
 }
 

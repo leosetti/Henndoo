@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject var viewRouter: ViewRouter
     var signuplabel: LocalizedStringKey = "signup"
     
     var body: some View {
@@ -16,7 +17,7 @@ struct LoginView: View {
                 LoginText()
                 WelcomeImage()
                 LoginForm()
-                NavView(content: {SignupView()}, text: signuplabel)
+                NavView(content: {SignupView(viewRouter: viewRouter)}, text: signuplabel)
             }
            
         }
@@ -25,7 +26,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(viewRouter: ViewRouter())
     }
 }
 
