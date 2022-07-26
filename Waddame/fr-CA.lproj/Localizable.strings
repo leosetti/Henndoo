@@ -8,6 +8,8 @@
 
 "welcome" = "Bienvenue!";
 "username" = "Nom d'usager";
+"firstname" = "Prénom";
+"lastname" = "Nom";
 "password" = "Mot de passe";
 "email" = "Courriel";
 "login" = "Connexion";

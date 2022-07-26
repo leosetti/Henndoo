@@ -27,13 +27,8 @@ class UserLoader: ObservableObject {
         }
     }
     
-    func createUser(withUsername username: String, withEmail email:String, withPassword password:String, then handler: @escaping Handler) {
-        let body: [String: Any] = [
-            "username": username,
-            "email": email,
-            "password": password
-        ]
-        let jsonData = try? JSONSerialization.data(withJSONObject: body)
+    func createUser(withObject object:[String: Any], then handler: @escaping Handler) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: object)
 
         let urlString = configuration.environment.apiURL + "users"
         if AppUtil.isInDebugMode {
