@@ -11,11 +11,11 @@ struct SignupView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
-        VStack {
-            ScrollView{
+        ScrollView{
+            VStack {
                 SignupText()
                 SignupForm()
-            }
+            }.padding()
         }
     }
 }

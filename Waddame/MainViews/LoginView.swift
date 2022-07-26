@@ -18,8 +18,7 @@ struct LoginView: View {
                 WelcomeImage()
                 LoginForm()
                 NavView(content: {SignupView()}, text: signuplabel)
-            }
-           
+            }.padding()
         }
     }
 }
