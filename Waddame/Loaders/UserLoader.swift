@@ -11,15 +11,28 @@ class UserLoader: ObservableObject {
     enum UserError: Error {
         case loading
         case fetching
+        case encoding
     }
     
     typealias Handler = (Result<User, Error>) -> Void
+    
 
     private let cache = Cache<String, User>()
     private var configuration = Configuration()
 
     func getUser(withID id: String,
-                     then handler: @escaping Handler) {
+        then handler: @escaping Handler) {
+        
+        try? self.cache.readFromDisk(withName: "users", andInitializer: {
+            data in
+            do {
+                let user = try User.init(data: data)
+                return user
+            } catch {
+                print(error)
+            }
+            return nil
+        })
         if let cached = cache[id] {
             return handler(.success(cached))
         }else{
@@ -56,9 +69,17 @@ class UserLoader: ObservableObject {
             }
 
             do {
-              let userModel = try JSONDecoder().decode(User.self, from: data)
+                let userModel = try JSONDecoder().decode(User.self, from: data)
+                self.cache["self"] = userModel
+                try self.cache.saveToDisk(withName: "users")
                 handler(.success(userModel))
                 
+            } catch let err as EncodingError {
+                if AppUtil.isInDebugMode {
+                    print("JSON encoding error")
+                }
+                handler(.failure(UserError.encoding))
+                return
             } catch let jsonError as NSError {
                 if AppUtil.isInDebugMode {
                     print("JSON decode failed: \(jsonError.localizedDescription)")

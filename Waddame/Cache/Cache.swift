@@ -149,6 +149,8 @@ extension Cache: Codable where Key: Codable, Value: Codable {
 }
 
 extension Cache where Key: Codable, Value: Codable {
+    typealias Initializer = (Data) -> Value?
+    
     func saveToDisk(
         withName name: String,
         using fileManager: FileManager = .default
@@ -161,6 +163,35 @@ extension Cache where Key: Codable, Value: Codable {
         let fileURL = folderURLs[0].appendingPathComponent(name + ".cache")
         let data = try JSONEncoder().encode(self)
         try data.write(to: fileURL)
+    }
+    
+    func readFromDisk(
+        withName name: String,
+        andInitializer initializer: @escaping Initializer,
+        using fileManager: FileManager = .default
+    ) throws {
+        let folderURLs = fileManager.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        )
+
+        let fileURL:URL = folderURLs[0].appendingPathComponent(name + ".cache")
+        if let jsonData = try? Data(contentsOf: fileURL)
+        {
+            if let results = try JSONSerialization.jsonObject(with: jsonData) as? [[String:Any]] {
+                if let key = results[0]["key"],
+                   let value = results[0]["value"]
+                {
+                    if let vdata = try? JSONSerialization.data(withJSONObject:value){
+                        if let dataUser = initializer(vdata){
+                            self.insert(dataUser, forKey: key as! Key)
+                        }
+                    }
+                }
+            } else {
+                    print("JSON was not the expected array of dictonary")
+            }
+        }
     }
 }
 
