@@ -46,7 +46,9 @@ struct WrapperView: View {
     private func handleActive() {
         findUser(id: "self") {
             value in logged = value
-            if(!value){
+            if(value){
+                viewRouter.currentScreen = .main
+            }else{
                 viewRouter.currentScreen = .login
             }
         }

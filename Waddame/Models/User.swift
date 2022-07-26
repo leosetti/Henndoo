@@ -20,6 +20,48 @@ struct User: Codable {
     let id, username, firstname, lastname, email: String
 }
 
+// MARK: User convenience initializers and mutators
+extension User {
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode(User.self, from: data)
+    }
+
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
+    }
+
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
+    }
+
+    func with(
+        id: String? = nil,
+        username: String? = nil,
+        firstname: String? = nil,
+        lastname: String? = nil,
+        email: String? = nil
+    ) -> User {
+        return User(
+            id: id ?? self.id,
+            username: username ?? self.username,
+            firstname: firstname ?? self.firstname,
+            lastname: lastname ?? self.lastname,
+            email: email ?? self.email
+        )
+    }
+
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
+    }
+}
+
 
 // MARK: - URLSession response handlers
 
