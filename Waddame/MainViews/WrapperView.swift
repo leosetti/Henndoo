@@ -30,6 +30,9 @@ struct WrapperView: View {
                 Text(loadinglabel)
             }
         }.onAppear() {
+            if AppUtil.isInDebugMode {
+                print("WrapperView loaded")
+            }
             handleActive()
         }.onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
