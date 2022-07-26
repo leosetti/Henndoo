@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct SignupView: View {
-    @StateObject var viewRouter: ViewRouter
-    @State var logged: Bool = false
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
         VStack {
             SignupText()
-            SignupForm(viewRouter: viewRouter)
+            SignupForm()
         }
     }
 }
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView(viewRouter:ViewRouter())
+        SignupView()
     }
 }
 
@@ -36,7 +35,7 @@ struct SignupText: View {
 }
 
 struct SignupForm: View {
-    @StateObject var viewRouter: ViewRouter
+    @EnvironmentObject var viewRouter: ViewRouter
     
     @State var username: String = ""
     @State var password: String = ""
@@ -47,8 +46,10 @@ struct SignupForm: View {
     var emaillabel: LocalizedStringKey = "email"
     
     @State var user:User? = nil
-    @State private var t1: String = ""
     @EnvironmentObject var userManager: UserLoader
+    
+    var createUserError: LocalizedStringKey = "createUserError"
+    @State var viewError: Bool = false
         
     var body: some View {
         TextField(emaillabel, text: $email)
@@ -67,16 +68,19 @@ struct SignupForm: View {
                         .cornerRadius(5.0)
                         .padding(.bottom, 20)
         
-        Text(t1)
+        Text(createUserError)
+            .isHidden(!viewError)
         
         Button(action: {
             userManager.createUser(withUsername: username, withEmail: email, withPassword: password, then: {result in
                 if case .success = result {
-                    viewRouter.currentScreen = .main
+                    DispatchQueue.main.async() {
+                        viewRouter.currentScreen = .main
+                    }
                 }
                 if case .failure = result {
                     DispatchQueue.main.async() {
-                        t1 = "Error!!"
+                        viewError = true
                     }
                 }
             })

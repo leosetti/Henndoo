@@ -19,3 +19,5 @@
 "home" = "Home";
 "profile" = "Profile";
 "loading" = "Loading...";
+
+"createUserError" = "Error creating account";

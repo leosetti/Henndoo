@@ -32,13 +32,10 @@ class UserLoader: ObservableObject {
             "email": email,
             "password": password
         ]
-                
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
 
         let url = URL(string: "http://local.waddame.ca:3900/api/users")!
-        
         var request = URLRequest(url: url)
-        
         request.httpMethod = "POST"
         request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

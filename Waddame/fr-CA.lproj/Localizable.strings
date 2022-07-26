@@ -19,3 +19,5 @@
 "home" = "Accueil";
 "profile" = "Profil";
 "loading" = "En chargement...";
+
+"createUserError" = "Erreur de création de compte";

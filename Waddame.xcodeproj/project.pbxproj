@@ -18,6 +18,8 @@
 		44F7435328834AB00033E9DB /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7435228834AB00033E9DB /* AccountView.swift */; };
 		44F7435528834BD90033E9DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F7435428834BD90033E9DB /* MainView.swift */; };
 		6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABB42C2882D7E600C1C042 /* Cache.swift */; };
+		6FABB42F288EED2200C1C042 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABB42E288EED2200C1C042 /* Encoder.swift */; };
+		6FABB432288EF05800C1C042 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABB431288EF05800C1C042 /* View.swift */; };
 		6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */; };
 		6FE09D522881F31F00B53EE7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D512881F31F00B53EE7 /* LoginView.swift */; };
 		6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D532881F32000B53EE7 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		44F7435228834AB00033E9DB /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		44F7435428834BD90033E9DB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6FABB42C2882D7E600C1C042 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		6FABB42E288EED2200C1C042 /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		6FABB431288EF05800C1C042 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		6FE09D4C2881F31F00B53EE7 /* Waddame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waddame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameApp.swift; sourceTree = "<group>"; };
 		6FE09D512881F31F00B53EE7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				44C606CC288C811900BCF709 /* User.swift */,
+				6FABB42E288EED2200C1C042 /* Encoder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +154,14 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		6FABB430288EF04600C1C042 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6FABB431288EF05800C1C042 /* View.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6FE09D432881F31F00B53EE7 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +185,7 @@
 		6FE09D4E2881F31F00B53EE7 /* Waddame */ = {
 			isa = PBXGroup;
 			children = (
+				6FABB430288EF04600C1C042 /* Extensions */,
 				44C606D6288DC9C800BCF709 /* Info.plist */,
 				44C606D3288DB1FD00BCF709 /* GenericViews */,
 				44C606D0288C912700BCF709 /* Loaders */,
@@ -348,6 +362,7 @@
 			files = (
 				44C606D5288DB22100BCF709 /* NavView.swift in Sources */,
 				44F7435328834AB00033E9DB /* AccountView.swift in Sources */,
+				6FABB432288EF05800C1C042 /* View.swift in Sources */,
 				44C606CD288C811900BCF709 /* User.swift in Sources */,
 				44C606D8288E1A6400BCF709 /* ViewRouter.swift in Sources */,
 				44F7435528834BD90033E9DB /* MainView.swift in Sources */,
@@ -355,6 +370,7 @@
 				6FE09D522881F31F00B53EE7 /* LoginView.swift in Sources */,
 				44F7434F288343B70033E9DB /* HomeView.swift in Sources */,
 				6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */,
+				6FABB42F288EED2200C1C042 /* Encoder.swift in Sources */,
 				6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */,
 				6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */,
 				44C606CF288C899100BCF709 /* WrapperView.swift in Sources */,
