@@ -21,9 +21,9 @@ struct WrapperView: View {
             if let _: Bool = logged {
                 switch viewRouter.currentScreen {
                 case .login:
-                    LoginView(viewRouter: viewRouter)
+                    LoginView()
                 case .main:
-                    MainView(viewRouter: viewRouter)
+                    MainView()
                 }
             }
             else {
@@ -37,11 +37,15 @@ struct WrapperView: View {
             }
         }
         .environmentObject(userLoader)
+        .environmentObject(viewRouter)
     }
     
     private func handleActive() {
         findUser(id: "self") {
             value in logged = value
+            if(!value){
+                viewRouter.currentScreen = .login
+            }
         }
     }
     

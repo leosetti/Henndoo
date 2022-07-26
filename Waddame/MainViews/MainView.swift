@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var viewRouter: ViewRouter
-    
     var homelabel: LocalizedStringKey = "home"
     var peofilelabel: LocalizedStringKey = "profile"
     
@@ -30,6 +28,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewRouter:ViewRouter())
+        MainView()
     }
 }
