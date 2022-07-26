@@ -109,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				44C606CC288C811900BCF709 /* User.swift */,
-				6FABB42E288EED2200C1C042 /* Encoder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +168,8 @@
 		6FABB43D28901B4E00C1C042 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6FABB42E288EED2200C1C042 /* Encoder.swift */,
+				44C606D7288E1A6300BCF709 /* ViewRouter.swift */,
 				6FABB43E28901B5C00C1C042 /* AppUtil.swift */,
 			);
 			path = Utils;
@@ -211,7 +212,6 @@
 				6FE09D552881F32000B53EE7 /* Preview Content */,
 				6FE09D7D2881FB2800B53EE7 /* Localizable.strings */,
 				44F7434C2883284E0033E9DB /* Variables.swift */,
-				44C606D7288E1A6300BCF709 /* ViewRouter.swift */,
 				6FABB43B289018C500C1C042 /* Configuration.swift */,
 			);
 			path = Waddame;
