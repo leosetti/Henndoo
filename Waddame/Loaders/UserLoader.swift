@@ -16,6 +16,7 @@ class UserLoader: ObservableObject {
     typealias Handler = (Result<User, Error>) -> Void
 
     private let cache = Cache<String, User>()
+    private var configuration = Configuration()
 
     func getUser(withID id: String,
                      then handler: @escaping Handler) {
@@ -34,7 +35,11 @@ class UserLoader: ObservableObject {
         ]
         let jsonData = try? JSONSerialization.data(withJSONObject: body)
 
-        let url = URL(string: "http://local.waddame.ca:3900/api/users")!
+        let urlString = configuration.environment.apiURL + "users"
+        if AppUtil.isInDebugMode {
+            print("URLString = \(urlString)")
+        }
+        let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
@@ -42,21 +47,27 @@ class UserLoader: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            //print("-----> data: \(String(describing: data))")
-            //print("-----> error: \(String(describing: error))")
+            if AppUtil.isInDebugMode {
+                print("-----> data: \(String(describing: data))")
+                print("-----> error: \(String(describing: error))")
+            }
               
-              guard let data = data, error == nil else {
-                  //print(error?.localizedDescription ?? "No data")
-                  handler(.failure(UserError.fetching))
-                  return
-              }
+            guard let data = data, error == nil else {
+                if AppUtil.isInDebugMode {
+                    print(error?.localizedDescription ?? "No data")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
 
             do {
               let userModel = try JSONDecoder().decode(User.self, from: data)
                 handler(.success(userModel))
                 
             } catch let jsonError as NSError {
-                //print("JSON decode failed: \(jsonError.localizedDescription)")
+                if AppUtil.isInDebugMode {
+                    print("JSON decode failed: \(jsonError.localizedDescription)")
+                }
                 handler(.failure(UserError.fetching))
                 return
             }
