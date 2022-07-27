@@ -8,6 +8,8 @@
 
 "welcome" = "Welcome!";
 "username" = "User name";
+"firstname" = "First name";
+"lastname" = "Last name";
 "password" = "Password";
 "email" = "Email";
 "login" = "Login";
@@ -18,3 +20,6 @@
 "my_account" = "My account";
 "home" = "Home";
 "profile" = "Profile";
+"loading" = "Loading...";
+
+"createUserError" = "Error creating account";
