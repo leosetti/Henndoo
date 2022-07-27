@@ -388,6 +388,8 @@
 				6FE09D522881F31F00B53EE7 /* ContentView.swift in Sources */,
 				6FABB42F288EED2200C1C042 /* Encoder.swift in Sources */,
 				6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */,
+				6FABB42F288EED2200C1C042 /* Encoder.swift in Sources */,
+				6FABB42D2882D7E600C1C042 /* Cache.swift in Sources */,
 				6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */,
 				44C606CF288C899100BCF709 /* WrapperView.swift in Sources */,
 				44F74351288345510033E9DB /* SignupView.swift in Sources */,
