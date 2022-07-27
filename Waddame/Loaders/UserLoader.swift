@@ -29,7 +29,9 @@ class UserLoader: ObservableObject {
                 let user = try User.init(data: data)
                 return user
             } catch {
-                print(error)
+                if AppUtil.isInDebugMode {
+                    print(error)
+                }
             }
             return nil
         })
