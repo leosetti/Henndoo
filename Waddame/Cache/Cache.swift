@@ -179,17 +179,22 @@ extension Cache where Key: Codable, Value: Codable {
         if let jsonData = try? Data(contentsOf: fileURL)
         {
             if let results = try JSONSerialization.jsonObject(with: jsonData) as? [[String:Any]] {
-                if let key = results[0]["key"],
-                   let value = results[0]["value"]
-                {
-                    if let vdata = try? JSONSerialization.data(withJSONObject:value){
-                        if let dataUser = initializer(vdata){
+                for result in results {
+                    if let key = result["key"],
+                       let value = result["value"],
+                       let vdata = try? JSONSerialization.data(withJSONObject:value),
+                       let dataUser = initializer(vdata){
                             self.insert(dataUser, forKey: key as! Key)
+                    }else{
+                        if AppUtil.isInDebugMode {
+                            print("Expected keys not found in dictonary")
                         }
                     }
                 }
             } else {
+                if AppUtil.isInDebugMode {
                     print("JSON was not the expected array of dictonary")
+                }
             }
         }
     }

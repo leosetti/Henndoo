@@ -33,9 +33,11 @@ struct WrapperView: View {
             if AppUtil.isInDebugMode {
                 print("WrapperView loaded")
             }
-            handleActive()
         }.onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
+                if AppUtil.isInDebugMode {
+                    print("WrapperView active")
+                }
                 handleActive()
             }
         }
@@ -55,7 +57,6 @@ struct WrapperView: View {
     }
     
     private func findUser(id: String, completion: @escaping (Bool) -> Void) {
-        
         userLoader.getUser(withID: id, then: { result in
             if case .success = result {
                 DispatchQueue.main.async() {
