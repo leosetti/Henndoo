@@ -52,15 +52,20 @@ struct WelcomeImage: View {
 }
 
 struct LoginForm: View {
-    @State var username: String = ""
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var userManager: UserLoader
+    
+    @State var login: String = ""
     @State var password: String = ""
     
-    var unamelabel: LocalizedStringKey = "username"
+    var loginlabel: LocalizedStringKey = "login"
     var pwdlabel: LocalizedStringKey = "password"
     
-
+    var loginError: LocalizedStringKey = "loginError"
+    @State var viewError: Bool = false
+    
     var body: some View {
-        TextField(unamelabel, text: $username)
+        TextField(loginlabel, text: $login)
             .padding()
             .background(lightGreyColor)
             .cornerRadius(5.0)
@@ -70,7 +75,30 @@ struct LoginForm: View {
                         .background(lightGreyColor)
                         .cornerRadius(5.0)
                         .padding(.bottom, 10)
-        Button(action: {print("Button tapped")}) {
+        
+        Text(loginError)
+            .isHidden(!viewError)
+        
+        Button(action: {
+            let body: [String: Any] = [
+                "login": login,
+                "password": password
+            ]
+            
+            userManager.loginUser(withObject: body, then: {result in
+                if case .success = result {
+                    DispatchQueue.main.async() {
+                        viewRouter.currentScreen = .main
+                    }
+                }
+                if case .failure = result {
+                    DispatchQueue.main.async() {
+                        viewError = true
+                    }
+                }
+            })
+            
+        }) {
             LoginButtonContent()
         }
         

@@ -14,6 +14,7 @@
 "email" = "Courriel";
 "login" = "Connexion";
 "login_action" = "Se connecter";
+"logout_action" = "Se déconnecter";
 "signup" = "Inscription";
 "signup_action" = "S'inscrire";
 
@@ -23,3 +24,4 @@
 "loading" = "En chargement...";
 
 "createUserError" = "Erreur de création de compte";
+"loginError" = "Erreur de connexion";

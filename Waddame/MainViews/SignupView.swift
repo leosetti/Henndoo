@@ -109,7 +109,6 @@ struct SignupForm: View {
                         }
                     }
                 })
-                
             }) {
                 SignupButtonContent()
             }
