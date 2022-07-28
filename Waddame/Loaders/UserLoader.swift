@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserLoader: ObservableObject {
     enum UserError: Error {
@@ -15,14 +16,37 @@ class UserLoader: ObservableObject {
     }
     
     typealias Handler = (Result<User, Error>) -> Void
+    typealias TokenHandler = (Result<UserToken, Error>) -> Void
     
-
     private let cache = Cache<String, User>()
+    private let tokencache = Cache<String, UserToken>()
     private var configuration = Configuration()
 
+    func getUserToken(withID id: String,
+        then handler: @escaping TokenHandler) {
+
+        try? self.tokencache.readFromDisk(withName: "token", andInitializer: {
+            data in
+            do {
+                let usertok = try UserToken.init(data: data)
+                return usertok
+            } catch {
+                if AppUtil.isInDebugMode {
+                    print(error)
+                }
+            }
+            return nil
+        })
+        if let cached = tokencache[id] {
+            return handler(.success(cached))
+        }else{
+            return handler(.failure(UserError.loading))
+        }
+    }
+    
     func getUser(withID id: String,
         then handler: @escaping Handler) {
-        
+
         try? self.cache.readFromDisk(withName: "users", andInitializer: {
             data in
             do {
@@ -61,6 +85,31 @@ class UserLoader: ObservableObject {
                 print("-----> data: \(String(describing: data))")
                 print("-----> error: \(String(describing: error))")
             }
+            
+            if let httpUrlResponse = response as? HTTPURLResponse
+            {
+                if let bearer:String = httpUrlResponse.allHeaderFields["Authorization"] as? String{
+                    let bearerComponents = bearer.components(separatedBy: " ")
+                    if (bearerComponents.count > 1){
+                        let token = bearerComponents[1]
+                        do{
+                            let tokenDictionary = try decode(jwtToken: token)
+                            let jsonToken = try JSONSerialization.data(withJSONObject: tokenDictionary)
+                            let tokenObject = try JSONDecoder().decode(UserToken.self, from: jsonToken)
+                            self.tokencache.insert(tokenObject, forKey: "self")
+                            
+                            if AppUtil.isInDebugMode {
+                                print(tokenObject)
+                            }
+                            
+                        } catch let error {
+                            if AppUtil.isInDebugMode {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
               
             guard let data = data, error == nil else {
                 if AppUtil.isInDebugMode {
@@ -74,11 +123,12 @@ class UserLoader: ObservableObject {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
                 self.cache["self"] = userModel
                 try self.cache.saveToDisk(withName: "users")
+                try self.tokencache.saveToDisk(withName: "token")
                 handler(.success(userModel))
                 
             } catch let err as EncodingError {
                 if AppUtil.isInDebugMode {
-                    print("JSON encoding error")
+                    print("JSON encoding error: \(err.localizedDescription)")
                 }
                 handler(.failure(UserError.encoding))
                 return
