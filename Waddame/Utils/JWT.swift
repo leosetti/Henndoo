@@ -9,6 +9,7 @@ import Foundation
 
 func decode(jwtToken jwt: String) throws -> [String: Any] {
     enum DecodeErrors: Error {
+        case missingToken
         case badToken
         case other
     }
@@ -34,5 +35,8 @@ func decode(jwtToken jwt: String) throws -> [String: Any] {
     }
 
     let segments = jwt.components(separatedBy: ".")
+    guard segments.count>1 else {
+        throw DecodeErrors.other
+    }
     return try decodeJWTPart(segments[1])
 }

@@ -69,42 +69,38 @@ struct WrapperView: View {
     }
     
     private func validateUserToken(completion: @escaping (Bool) -> Void) {
-        userLoader.getUserToken(withID: "self", then: { result in
-            switch result {
-                case .success(let tokenInResult):
-                
-                let epochTime = TimeInterval(tokenInResult.iat) / 1000
-                let myDate = Date(timeIntervalSince1970: epochTime)
-                if AppUtil.isInDebugMode {
-                    print("Token date : \(myDate)")
+        let token = userLoader.getUserToken()
+        if(token == nil){
+            DispatchQueue.main.async() {
+                completion(false)
+            }
+        }else{
+            let epochTime = TimeInterval(token!.iat) / 1000
+            let myDate = Date(timeIntervalSince1970: epochTime)
+            if AppUtil.isInDebugMode {
+                print("Token date : \(myDate)")
+            }
+            
+            var validInterval:Double = 60 * 30
+            if AppUtil.isInDebugMode {
+                validInterval = 60
+            }
+            
+            let lastValidDate = myDate.addingTimeInterval(validInterval)
+            if AppUtil.isInDebugMode {
+                print("Last valid date for token : \(lastValidDate)")
+            }
+            
+            if Date.now < lastValidDate {
+                DispatchQueue.main.async() {
+                    completion(true)
                 }
-                
-                var validInterval:Double = 60 * 30
-                if AppUtil.isInDebugMode {
-                    validInterval = 60
+            }else{
+                DispatchQueue.main.async() {
+                    completion(false)
                 }
-                
-                let lastValidDate = myDate.addingTimeInterval(validInterval)
-                if AppUtil.isInDebugMode {
-                    print("Last valid date for token : \(lastValidDate)")
-                }
-                
-                if Date.now < lastValidDate {
-                    DispatchQueue.main.async() {
-                        completion(true)
-                    }
-                }else{
-                    DispatchQueue.main.async() {
-                        completion(false)
-                    }
-                }
-                
-                case .failure(_):
-                    DispatchQueue.main.async() {
-                        completion(false)
-                    }
-                }
-        })
+            }
+        }
     }
     
     private func findUser(id: String, completion: @escaping (Bool) -> Void) {

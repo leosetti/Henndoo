@@ -16,31 +16,19 @@ class UserLoader: ObservableObject {
     }
     
     typealias Handler = (Result<User, Error>) -> Void
-    typealias TokenHandler = (Result<UserToken, Error>) -> Void
     
+    @AppStorage("tokenString") private var tokenString = ""
     private let cache = Cache<String, User>()
-    private let tokencache = Cache<String, UserToken>()
     private var configuration = Configuration()
-
-    func getUserToken(withID id: String,
-        then handler: @escaping TokenHandler) {
-
-        try? self.tokencache.readFromDisk(withName: "token", andInitializer: {
-            data in
-            do {
-                let usertok = try UserToken.init(data: data)
-                return usertok
-            } catch {
-                if AppUtil.isInDebugMode {
-                    print(error)
-                }
-            }
+    
+    func getUserToken() -> UserToken? {
+        do {
+            let tokenDictionary = try decode(jwtToken: tokenString)
+            let jsonToken = try JSONSerialization.data(withJSONObject: tokenDictionary)
+            let tokenObject = try JSONDecoder().decode(UserToken.self, from: jsonToken)
+            return tokenObject
+        } catch {
             return nil
-        })
-        if let cached = tokencache[id] {
-            return handler(.success(cached))
-        }else{
-            return handler(.failure(UserError.loading))
         }
     }
     
@@ -92,21 +80,7 @@ class UserLoader: ObservableObject {
                     let bearerComponents = bearer.components(separatedBy: " ")
                     if (bearerComponents.count > 1){
                         let token = bearerComponents[1]
-                        do{
-                            let tokenDictionary = try decode(jwtToken: token)
-                            let jsonToken = try JSONSerialization.data(withJSONObject: tokenDictionary)
-                            let tokenObject = try JSONDecoder().decode(UserToken.self, from: jsonToken)
-                            self.tokencache.insert(tokenObject, forKey: "self")
-                            
-                            if AppUtil.isInDebugMode {
-                                print(tokenObject)
-                            }
-                            
-                        } catch let error {
-                            if AppUtil.isInDebugMode {
-                                print(error.localizedDescription)
-                            }
-                        }
+                        self.tokenString = token
                     }
                 }
             }
@@ -123,7 +97,6 @@ class UserLoader: ObservableObject {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
                 self.cache["self"] = userModel
                 try self.cache.saveToDisk(withName: "users")
-                try self.tokencache.saveToDisk(withName: "token")
                 handler(.success(userModel))
                 
             } catch let err as EncodingError {
@@ -145,12 +118,11 @@ class UserLoader: ObservableObject {
     }
     
     func logoutUser() {
-        self.tokencache.removeValue(forKey: "self")
+        self.tokenString = ""
         self.cache.removeValue(forKey: "self")
         
         do {
             try self.cache.saveToDisk(withName: "users")
-            try self.tokencache.saveToDisk(withName: "token")
         } catch let jsonError as NSError {
             if AppUtil.isInDebugMode {
                 print("JSON decode failed: \(jsonError.localizedDescription)")
@@ -178,10 +150,13 @@ class UserLoader: ObservableObject {
                 print("-----> error: \(String(describing: error))")
                 
                 do{
-                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
-                    print("-----> jsondata: \(String(describing: json))")
-                }catch{ print("erroMsg") }
-                
+                    if(data != nil){
+                        let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                        print("-----> jsondata: \(String(describing: json))")
+                    }
+                }catch{
+                    print("Impossible to print data")
+                }
             }
             
             if let httpUrlResponse = response as? HTTPURLResponse
@@ -190,21 +165,7 @@ class UserLoader: ObservableObject {
                     let bearerComponents = bearer.components(separatedBy: " ")
                     if (bearerComponents.count > 1){
                         let token = bearerComponents[1]
-                        do{
-                            let tokenDictionary = try decode(jwtToken: token)
-                            let jsonToken = try JSONSerialization.data(withJSONObject: tokenDictionary)
-                            let tokenObject = try JSONDecoder().decode(UserToken.self, from: jsonToken)
-                            self.tokencache.insert(tokenObject, forKey: "self")
-                            
-                            if AppUtil.isInDebugMode {
-                                print(tokenObject)
-                            }
-                            
-                        } catch let error {
-                            if AppUtil.isInDebugMode {
-                                print(error.localizedDescription)
-                            }
-                        }
+                        self.tokenString = token
                     }
                 }
             }
@@ -221,7 +182,6 @@ class UserLoader: ObservableObject {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
                 self.cache["self"] = userModel
                 try self.cache.saveToDisk(withName: "users")
-                try self.tokencache.saveToDisk(withName: "token")
                 handler(.success(userModel))
                 
             } catch let err as EncodingError {
