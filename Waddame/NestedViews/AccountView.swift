@@ -10,10 +10,13 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
+    @State private var user: User?
     
     var body: some View {
         VStack {
-            AccountText()
+            if user != nil {
+                AccountText(user: user!)
+            }
             Button(action: {
                 userManager.logoutUser()
                 viewRouter.currentScreen = .login
@@ -22,6 +25,16 @@ struct AccountView: View {
             }
         }
         .padding()
+        .onAppear(){
+            userManager.getUser(withID: "self", then: { result in
+                switch result {
+                    case .success(let userFromResult):
+                        user = userFromResult
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+            })
+        }
     }
 }
 
@@ -31,17 +44,28 @@ struct AccountView_Previews: PreviewProvider {
     }
 }
 
-struct AccountText: View {
+fileprivate struct AccountText: View {
+    var user: User
+    
     var label: LocalizedStringKey = "my_account"
     var body: some View {
         Text(label)
             .font(.largeTitle)
             .fontWeight(.semibold)
             .padding(.bottom, 20)
+        Text("\(user.firstname) \(user.lastname)")
+            .font(.body)
+            .padding(.bottom, 7)
+        Text(user.username)
+            .font(.body)
+            .padding(.bottom, 7)
+        Text(user.email)
+            .font(.body)
+            .padding(.bottom, 20)
     }
 }
 
-struct LogoutButtonContent: View {
+fileprivate struct LogoutButtonContent: View {
     var loginlabel: LocalizedStringKey = "logout_action"
     
     var body: some View {

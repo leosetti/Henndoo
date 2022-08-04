@@ -53,7 +53,7 @@ struct WrapperView: View {
                 print("Token valid = \(value)")
             }
             if value {
-                findUser(id: "self") {
+                userLoader.findUser(id: "self") {
                     value in logged = value
                     if(value){
                         viewRouter.currentScreen = .main
@@ -83,7 +83,7 @@ struct WrapperView: View {
             
             var validInterval:Double = 60 * 30
             if AppUtil.isInDebugMode {
-                validInterval = 60
+                validInterval = 60 * 3
             }
             
             let lastValidDate = myDate.addingTimeInterval(validInterval)
@@ -101,21 +101,6 @@ struct WrapperView: View {
                 }
             }
         }
-    }
-    
-    private func findUser(id: String, completion: @escaping (Bool) -> Void) {
-        userLoader.getUser(withID: id, then: { result in
-            if case .success = result {
-                DispatchQueue.main.async() {
-                    completion(true)
-                }
-            }
-            if case .failure = result {
-                DispatchQueue.main.async() {
-                    completion(false)
-                }
-            }
-        })
     }
 }
 

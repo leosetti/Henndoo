@@ -32,25 +32,44 @@ class UserLoader: ObservableObject {
         }
     }
     
+    func findUser(id: String, completion: @escaping (Bool) -> Void) {
+        getUser(withID: id, then: { result in
+            if case .success = result {
+                DispatchQueue.main.async() {
+                    completion(true)
+                }
+            }
+            if case .failure = result {
+                DispatchQueue.main.async() {
+                    completion(false)
+                }
+            }
+        })
+    }
+    
     func getUser(withID id: String,
         then handler: @escaping Handler) {
 
-        try? self.cache.readFromDisk(withName: "users", andInitializer: {
-            data in
-            do {
-                let user = try User.init(data: data)
-                return user
-            } catch {
-                if AppUtil.isInDebugMode {
-                    print(error)
-                }
-            }
-            return nil
-        })
         if let cached = cache[id] {
             return handler(.success(cached))
         }else{
-            return handler(.failure(UserError.loading))
+            try? self.cache.readFromDisk(withName: "users", andInitializer: {
+                data in
+                do {
+                    let user = try User.init(data: data)
+                    return user
+                } catch {
+                    if AppUtil.isInDebugMode {
+                        print(error)
+                    }
+                }
+                return nil
+            })
+            if let cached = cache[id] {
+                return handler(.success(cached))
+            }else{
+                return handler(.failure(UserError.loading))
+            }
         }
     }
     
