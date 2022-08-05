@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @StateObject private var userObject = UserObject()
+    
     var signuplabel: LocalizedStringKey = "signup"
     
     var body: some View {
@@ -19,7 +21,7 @@ struct LoginView: View {
                 LoginForm()
                 NavView(content: {SignupView()}, text: signuplabel)
             }.padding()
-        }
+        }.environmentObject(userObject)
     }
 }
 

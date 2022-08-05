@@ -12,12 +12,12 @@ enum UserFormContext {
     case edit
 }
 
-
 struct UserForm: View {
     var type: UserFormContext = .signup
     
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
+    @EnvironmentObject var userObject: UserObject
     
     @State var username: String = ""
     @State var firstname: String = ""
@@ -31,13 +31,12 @@ struct UserForm: View {
     var pwdlabel: LocalizedStringKey = "password"
     var emaillabel: LocalizedStringKey = "email"
     
-    @State var user:User? = nil
-    
     var createUserError: LocalizedStringKey = "createUserError"
     @State var viewError: Bool = false
         
     var body: some View {
         
+        Group{
             TextField(emaillabel, text: $email)
                 .padding()
                 .background(lightGreyColor)
@@ -58,31 +57,49 @@ struct UserForm: View {
                 .background(lightGreyColor)
                 .cornerRadius(5.0)
                 .padding(.bottom, 10)
-            SecureField(pwdlabel, text: $password)
-                            .padding()
-                            .background(lightGreyColor)
-                            .cornerRadius(5.0)
-                            .padding(.bottom, 20)
+            
+            if type == .signup {
+                SecureField(pwdlabel, text: $password)
+                                .padding()
+                                .background(lightGreyColor)
+                                .cornerRadius(5.0)
+                                .padding(.bottom, 20)
+            }
             
             Text(createUserError)
                 .isHidden(!viewError)
             
-        Button(action: {
-            let body: [String: Any] = [
-                "username": username,
-                "firstname": firstname,
-                "lastname": lastname,
-                "email": email,
-                "password": password
-            ]
-            switch type {
-            case .signup:
-                signupUser(withBody: body)
-            case .edit:
-                signupUser(withBody: body)
-            }
-            
-        }) {
+            Button(action: {
+                var body: [String: Any] = [:]
+                
+                if username != "" {
+                    body["username"] = username
+                }
+                
+                if firstname != "" {
+                    body["firstname"] = firstname
+                }
+                
+                if lastname != "" {
+                    body["lastname"] = lastname
+                }
+                
+                if email != "" {
+                    body["email"] = email
+                }
+                
+                if type == .signup {
+                    body["password"] = password
+                }
+                
+                switch type {
+                case .signup:
+                    signupUser(withBody: body)
+                case .edit:
+                    signupUser(withBody: body)
+                }
+                
+            }) {
             switch type {
                 case .signup:
                     SignupButtonContent()
@@ -90,7 +107,13 @@ struct UserForm: View {
                     SignupButtonContent()
                 }
             }
+        }.onAppear() {
+            username = userObject.user?.username ?? ""
+            firstname = userObject.user?.firstname ?? ""
+            lastname = userObject.user?.lastname ?? ""
+            email = userObject.user?.email ?? ""
         }
+    }
         
     private func signupUser(withBody body:[String: Any] ) {
         userManager.createUser(withObject: body, then: {result in

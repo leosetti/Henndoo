@@ -17,6 +17,8 @@
 "logout_action" = "Logout";
 "signup" = "Sign-up";
 "signup_action" = "Sign-up";
+"edit_profile" = "Edit my profile";
+"edit_action" = "Edit";
 
 "my_account" = "My account";
 "home" = "Home";

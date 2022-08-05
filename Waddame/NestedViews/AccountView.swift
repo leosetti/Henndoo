@@ -10,31 +10,36 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
-    @State private var user: User?
+    @StateObject private var userObject = UserObject()
+    
+    var editlabel: LocalizedStringKey = "edit_profile"
     
     var body: some View {
-        VStack {
-            if user != nil {
-                AccountText(user: user!)
+        NavigationView {
+            VStack {
+                if userObject.user != nil {
+                    AccountText(user: userObject.user!)
+                    NavView(content: {EditView()}, text: editlabel)
+                }
+                Button(action: {
+                    userManager.logoutUser()
+                    viewRouter.currentScreen = .login
+                }) {
+                    LogoutButtonContent()
+                }
             }
-            Button(action: {
-                userManager.logoutUser()
-                viewRouter.currentScreen = .login
-            }) {
-                LogoutButtonContent()
+            .padding()
+            .onAppear(){
+                userManager.getUser(withID: "self", then: { result in
+                    switch result {
+                        case .success(let userFromResult):
+                        userObject.user = userFromResult
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                })
             }
-        }
-        .padding()
-        .onAppear(){
-            userManager.getUser(withID: "self", then: { result in
-                switch result {
-                    case .success(let userFromResult):
-                        user = userFromResult
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-            })
-        }
+        }.environmentObject(userObject)
     }
 }
 

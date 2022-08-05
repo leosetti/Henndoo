@@ -17,6 +17,8 @@
 "logout_action" = "Se déconnecter";
 "signup" = "Inscription";
 "signup_action" = "S'inscrire";
+"edit_profile" = "Éditer mon profil";
+"edit_action" = "Éditer";
 
 "my_account" = "Mon compte";
 "home" = "Accueil";
