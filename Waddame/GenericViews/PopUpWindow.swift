@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct PopUpWindow: View {
+    typealias Handler = () -> Void
+    
     var title: LocalizedStringKey
     var message: LocalizedStringKey
     var buttonText: String
+    var handler: Handler
+    
     @Binding var show: Bool
 
     var body: some View {
@@ -36,6 +40,7 @@ struct PopUpWindow: View {
 
                     Button(action: {
                         // Dismiss the PopUp
+                        handler()
                         withAnimation(.linear(duration: 0.3)) {
                             show = false
                         }
@@ -58,6 +63,6 @@ struct PopUpWindow: View {
 
 struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
-        PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", show: .constant(true))
+        PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", handler: {}, show: .constant(true))
     }
 }

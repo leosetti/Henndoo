@@ -118,7 +118,7 @@ struct UserForm: View {
                 lastname = userObject.user?.lastname ?? ""
                 email = userObject.user?.email ?? ""
             }.onChange(of: popUpObject.show, perform: {newValue in
-                if didFinishEditing {
+                if !popUpObject.show && didFinishEditing {
                     popToRoot()
                 }
             })
@@ -140,8 +140,10 @@ struct UserForm: View {
     }
     
     private func popToRoot() {
-        viewRouter.currentScreen = .main
-        self.rootIsActive = false
+        DispatchQueue.main.async() {
+            viewRouter.currentScreen = .main
+            self.rootIsActive = false
+        }
     }
     
     private func editUser(withBody body:[String: Any] ) {

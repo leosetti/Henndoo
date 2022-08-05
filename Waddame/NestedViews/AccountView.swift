@@ -11,6 +11,7 @@ struct AccountView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
     @StateObject private var userObject = UserObject()
+    @EnvironmentObject var popUpObject: PopUpObject
     @State var isActive : Bool = false
     
     var editlabel: LocalizedStringKey = "edit_profile"
@@ -20,7 +21,6 @@ struct AccountView: View {
             VStack {
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
-                    //NavView(content: {EditView()}, text: editlabel)
                     NavigationLink(destination: EditView(rootIsActive: self.$isActive), isActive: self.$isActive) {
                         Text(editlabel)
                             .foregroundColor(.blue)
@@ -32,6 +32,16 @@ struct AccountView: View {
                 }) {
                     LogoutButtonContent()
                 }
+                Button(action: {
+                    popUpObject.title = "popup_warning"
+                    popUpObject.message = "popup_close_account_message"
+                    popUpObject.show.toggle()
+                    popUpObject.handler = {
+                        deleteAccount()
+                    }
+                }) {
+                    CloseAccountContent()
+                }
             }
             .padding()
             .onAppear(){
@@ -40,11 +50,43 @@ struct AccountView: View {
                         case .success(let userFromResult):
                         userObject.user = userFromResult
                         case .failure(let error):
-                            print(error.localizedDescription)
+                            if AppUtil.isInDebugMode {
+                                print(error.localizedDescription)
+                            }
                         }
                 })
             }
         }.environmentObject(userObject)
+    }
+    
+    private func deleteAccount() {
+        if AppUtil.isInDebugMode {
+            print("Deleting account!")
+        }
+        
+        userManager.deleteUser(then: {
+            result in
+            if case .success = result {
+                if AppUtil.isInDebugMode {
+                    print("Account deleted")
+                }
+                DispatchQueue.main.async() {
+                    popUpObject.title = "popup_account_success"
+                    popUpObject.message = "popup_account_deleted"
+                    popUpObject.handler = {}
+                    popUpObject.show.toggle()
+                    viewRouter.currentScreen = .login
+                }
+            }
+            if case .failure = result {
+                DispatchQueue.main.async() {
+                    if AppUtil.isInDebugMode {
+                        print("Error deleting account")
+                    }
+                }
+            }
+        })
+        viewRouter.currentScreen = .login
     }
 }
 
@@ -76,16 +118,31 @@ fileprivate struct AccountText: View {
 }
 
 fileprivate struct LogoutButtonContent: View {
-    var loginlabel: LocalizedStringKey = "logout_action"
+    var label: LocalizedStringKey = "logout_action"
     
     var body: some View {
-        Text(loginlabel)
+        Text(label)
             .textCase(.uppercase)
             .font(.headline)
             .foregroundColor(.white)
             .padding()
             .frame(width: 220, height: 60)
             .background(Color.green)
+            .cornerRadius(15.0)
+    }
+}
+
+fileprivate struct CloseAccountContent: View {
+    var label: LocalizedStringKey = "account_close"
+    
+    var body: some View {
+        Text(label)
+            .textCase(.uppercase)
+            .font(.subheadline)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 220, height: 40)
+            .background(Color.red)
             .cornerRadius(15.0)
     }
 }

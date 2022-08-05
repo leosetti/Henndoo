@@ -99,7 +99,9 @@ class UserLoader: ObservableObject {
                     let bearerComponents = bearer.components(separatedBy: " ")
                     if (bearerComponents.count > 1){
                         let token = bearerComponents[1]
-                        self.tokenString = token
+                        DispatchQueue.main.async() {
+                            self.tokenString = token
+                        }
                     }
                 }
             }
@@ -184,6 +186,56 @@ class UserLoader: ObservableObject {
                 try self.cache.saveToDisk(withName: "users")
                 handler(.success(userModel))
                 
+            } catch let err as EncodingError {
+                if AppUtil.isInDebugMode {
+                    print("JSON encoding error: \(err.localizedDescription)")
+                }
+                handler(.failure(UserError.encoding))
+                return
+            } catch let jsonError as NSError {
+                if AppUtil.isInDebugMode {
+                    print("JSON decode failed: \(jsonError.localizedDescription)")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+        }
+          
+        task.resume()
+    }
+    
+    func deleteUser(then handler: @escaping Handler) {
+        let urlString = configuration.environment.apiURL + "users"
+        if AppUtil.isInDebugMode {
+            print("URLString = \(urlString)")
+        }
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(tokenString)", forHTTPHeaderField: "Authorization")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if AppUtil.isInDebugMode {
+                print("-----> data: \(String(describing: data))")
+                print("-----> error: \(String(describing: error))")
+            }
+              
+            guard let data = data, error == nil else {
+                if AppUtil.isInDebugMode {
+                    print(error?.localizedDescription ?? "No data")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+
+            do {
+                let userModel = try JSONDecoder().decode(User.self, from: data)
+                DispatchQueue.main.async() {
+                    self.tokenString = ""
+                }
+                self.cache["self"] = nil
+                try self.cache.saveToDisk(withName: "users")
+                handler(.success(userModel))
             } catch let err as EncodingError {
                 if AppUtil.isInDebugMode {
                     print("JSON encoding error: \(err.localizedDescription)")

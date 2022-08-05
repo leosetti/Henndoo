@@ -24,9 +24,13 @@
 "home" = "Home";
 "profile" = "Profile";
 "loading" = "Loading...";
+"account_close" = "Close account";
 
 "popup_account_success" = "Success!";
 "popup_account_message" = "Account information updated";
+"popup_account_deleted" = "Your account has been deleted";
+"popup_warning" = "Warning";
+"popup_close_account_message" = "This action will close your account";
 
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";

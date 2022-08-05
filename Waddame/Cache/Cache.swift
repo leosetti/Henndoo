@@ -201,26 +201,4 @@ extension Cache where Key: Codable, Value: Codable {
 }
 
 
-/*
- class ArticleLoader {
-     typealias Handler = (Result<Article, Error>) -> Void
-
-     private let cache = Cache<Article.ID, Article>()
-
-     func loadArticle(withID id: Article.ID,
-                      then handler: @escaping Handler) {
-         if let cached = cache[id] {
-             return handler(.success(cached))
-         }
-
-         performLoading { [weak self] result in
-             let article = try? result.get()
-             article.map { self?.cache[id] = $0 }
-             handler(result)
-         }
-     }
- }
- */
-
-
 
