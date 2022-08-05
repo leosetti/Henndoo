@@ -14,21 +14,27 @@ struct WrapperView: View {
     @StateObject var userLoader = UserLoader()
     @State private var logged: Bool?
     
+    @State private var showPopUp: Bool = false
+    @StateObject var popUpObject = PopUpObject()
+    
     var loadinglabel: LocalizedStringKey = "loading"
     
     var body: some View {
-        Group {
-            if let _: Bool = logged {
-                switch viewRouter.currentScreen {
-                case .login:
-                    LoginView()
-                case .main:
-                    MainView()
+        ZStack{
+            Group {
+                if let _: Bool = logged {
+                    switch viewRouter.currentScreen {
+                    case .login:
+                        LoginView()
+                    case .main:
+                        MainView()
+                    }
+                }
+                else {
+                    Text(loadinglabel)
                 }
             }
-            else {
-                Text(loadinglabel)
-            }
+            PopUpWindow(title: popUpObject.title, message: popUpObject.message, buttonText: "OK", show: $popUpObject.show)
         }.onAppear() {
             if AppUtil.isInDebugMode {
                 print("WrapperView loaded")
@@ -43,6 +49,7 @@ struct WrapperView: View {
         }
         .environmentObject(userLoader)
         .environmentObject(viewRouter)
+        .environmentObject(popUpObject)
     }
     
     private func handleActive() {

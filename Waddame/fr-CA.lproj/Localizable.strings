@@ -25,5 +25,8 @@
 "profile" = "Profil";
 "loading" = "En chargement...";
 
+"popup_account_success" = "Succès!";
+"popup_account_message" = "Informations de compte mises à jour";
+
 "createUserError" = "Erreur de création de compte";
 "loginError" = "Erreur de connexion";

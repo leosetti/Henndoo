@@ -25,5 +25,10 @@
 "profile" = "Profile";
 "loading" = "Loading...";
 
+"popup_account_success" = "Success!";
+"popup_account_message" = "Account information updated";
+
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";
+
+

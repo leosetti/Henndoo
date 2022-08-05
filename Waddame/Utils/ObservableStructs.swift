@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserObject: ObservableObject {
     @Published var user: User? = nil
+}
+
+class PopUpObject: ObservableObject {
+    @Published var show: Bool = false
+    @Published var title: LocalizedStringKey = ""
+    @Published var message: LocalizedStringKey = ""
 }
 
