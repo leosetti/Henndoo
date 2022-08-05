@@ -11,6 +11,7 @@ struct AccountView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
     @StateObject private var userObject = UserObject()
+    @State var isActive : Bool = false
     
     var editlabel: LocalizedStringKey = "edit_profile"
     
@@ -19,7 +20,11 @@ struct AccountView: View {
             VStack {
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
-                    NavView(content: {EditView()}, text: editlabel)
+                    //NavView(content: {EditView()}, text: editlabel)
+                    NavigationLink(destination: EditView(rootIsActive: self.$isActive), isActive: self.$isActive) {
+                        Text(editlabel)
+                            .foregroundColor(.blue)
+                    }
                 }
                 Button(action: {
                     userManager.logoutUser()

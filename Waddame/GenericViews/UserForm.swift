@@ -13,6 +13,7 @@ enum UserFormContext {
 }
 
 struct UserForm: View {
+    @Binding var rootIsActive : Bool
     var type: UserFormContext = .signup
     
     @EnvironmentObject var viewRouter: ViewRouter
@@ -96,7 +97,7 @@ struct UserForm: View {
                 case .signup:
                     signupUser(withBody: body)
                 case .edit:
-                    signupUser(withBody: body)
+                    editUser(withBody: body)
                 }
                 
             }) {
@@ -104,7 +105,7 @@ struct UserForm: View {
                 case .signup:
                     SignupButtonContent()
                 case .edit:
-                    SignupButtonContent()
+                    EditButtonContent()
                 }
             }
         }.onAppear() {
@@ -120,6 +121,23 @@ struct UserForm: View {
             if case .success = result {
                 DispatchQueue.main.async() {
                     viewRouter.currentScreen = .main
+                    self.rootIsActive = false
+                }
+            }
+            if case .failure = result {
+                DispatchQueue.main.async() {
+                    viewError = true
+                }
+            }
+        })
+    }
+    
+    private func editUser(withBody body:[String: Any] ) {
+        userManager.editUser(withObject: body, then: {result in
+            if case .success = result {
+                DispatchQueue.main.async() {
+                    viewRouter.currentScreen = .main
+                    self.rootIsActive = false
                 }
             }
             if case .failure = result {
@@ -132,10 +150,25 @@ struct UserForm: View {
 }
 
 fileprivate struct SignupButtonContent: View {
-    var loginlabel: LocalizedStringKey = "signup_action"
+    var label: LocalizedStringKey = "signup_action"
     
     var body: some View {
-        Text(loginlabel)
+        Text(label)
+            .textCase(.uppercase)
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 220, height: 60)
+            .background(Color.green)
+            .cornerRadius(15.0)
+    }
+}
+
+fileprivate struct EditButtonContent: View {
+    var label: LocalizedStringKey = "edit_action"
+    
+    var body: some View {
+        Text(label)
             .textCase(.uppercase)
             .font(.headline)
             .foregroundColor(.white)

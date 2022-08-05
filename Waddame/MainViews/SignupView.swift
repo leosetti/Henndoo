@@ -12,7 +12,7 @@ struct SignupView: View {
         ScrollView{
             VStack {
                 SignupText()
-                UserForm(type:.signup)
+                UserForm(rootIsActive: .constant(false), type:.signup)
             }.padding()
         }
     }
