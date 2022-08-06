@@ -31,6 +31,12 @@
 "popup_account_deleted" = "Votre compte a été supprimé";
 "popup_warning" = "Avertissement";
 "popup_close_account_message" = "Cette action fermera votre compte";
+"popup_error" = "Erreur";
 
 "createUserError" = "Erreur de création de compte";
 "loginError" = "Erreur de connexion";
+
+"form_login_error_1" = "Login trop court";
+"form_login_error_2" = "Login trop long";
+"form_password_error_1" = "Mot de passe trop court";
+"form_password_error_2" = "Mot de passe trop long";

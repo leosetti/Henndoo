@@ -31,8 +31,14 @@
 "popup_account_deleted" = "Your account has been deleted";
 "popup_warning" = "Warning";
 "popup_close_account_message" = "This action will close your account";
+"popup_error" = "Error";
 
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";
+
+"form_login_error_1" = "Login too short";
+"form_login_error_2" = "Login too long";
+"form_password_error_1" = "Password too short";
+"form_password_error_2" = "Password too long";
 
 
