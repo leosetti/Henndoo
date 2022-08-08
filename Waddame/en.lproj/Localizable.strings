@@ -36,8 +36,11 @@
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";
 
+"form_login_unauthorized" = "Wrong combination of login and password";
+"form_login_error" = "Wrong login format";
 "form_login_error_1" = "Login too short";
 "form_login_error_2" = "Login too long";
+"form_password_error" = "Wrong password format";
 "form_password_error_1" = "Password too short";
 "form_password_error_2" = "Password too long";
 

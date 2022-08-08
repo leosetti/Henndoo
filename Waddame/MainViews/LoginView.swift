@@ -66,6 +66,8 @@ struct LoginForm: View {
     var loginlabel: LocalizedStringKey = "login"
     var pwdlabel: LocalizedStringKey = "password"
     
+    @State var errorMesageString: LocalizedStringKey = "loginError"
+    
     enum Field: Hashable {
         case login
         case password
@@ -131,18 +133,45 @@ struct LoginForm: View {
                         "password": password
                     ]
                     
-                    userManager.loginUser(withObject: body, then: {result in
-                        if case .success = result {
-                            DispatchQueue.main.async() {
-                                viewRouter.currentScreen = .main
-                            }
+                    func treatError (with error:Error){
+                        if AppUtil.isInDebugMode {
+                            print(error.localizedDescription)
                         }
-                        if case .failure = result {
-                            DispatchQueue.main.async() {
-                                popUpObject.title = "popup_error"
-                                popUpObject.message = "loginError"
-                                popUpObject.show.toggle()
+                        switch error {
+                            case UserLoader.UserError.data(let path):
+                                switch path {
+                                case "login":
+                                    errorMesageString = "form_login_error"
+                                case "password":
+                                    errorMesageString = "form_password_error"
+                                default:
+                                    break
+                                }
+                            case UserLoader.UserError.unauthorized:
+                            errorMesageString = "form_login_unauthorized"
+                            break
+                            
+                            default:
+                            errorMesageString = "loginError"
                             }
+                        
+                    
+                        DispatchQueue.main.async() {
+                            popUpObject.title = "popup_error"
+                            popUpObject.message = errorMesageString
+                            popUpObject.show.toggle()
+                        }
+                    }
+                    
+                    userManager.loginUser(withObject: body, then: {result in
+                        switch result {
+                        case .success :
+                        DispatchQueue.main.async() {
+                                viewRouter.currentScreen = .main
+                        }
+                        break
+                        case .failure(let error) :
+                            treatError(with: error)
                         }
                     })
                     

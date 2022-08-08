@@ -13,6 +13,8 @@ class UserLoader: ObservableObject {
         case loading
         case fetching
         case encoding
+        case data(String)
+        case unauthorized
     }
     
     typealias Handler = (Result<User, Error>) -> Void
@@ -285,25 +287,44 @@ class UserLoader: ObservableObject {
             if AppUtil.isInDebugMode {
                 print("-----> data: \(String(describing: data))")
                 print("-----> error: \(String(describing: error))")
-                
-                do{
-                    if(data != nil){
-                        let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+            }
+            
+            do{
+                if(data != nil){
+                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                    if AppUtil.isInDebugMode {
                         print("-----> jsondata: \(String(describing: json))")
                     }
-                }catch{
-                    print("Impossible to print data")
+
+                    if let details = json?["details"],
+                    let contentDictionnarys = details as? [NSDictionary],
+                    let contentDictionnary = contentDictionnarys[0] as? NSDictionary,
+                    let pathDict = contentDictionnary["path"] as? [String],
+                    let path = pathDict[0] as? String {
+                        handler(.failure(UserError.data(path)))
+                        return
+                    }
                 }
+            }catch{
+                print("Impossible to print data")
             }
             
             if let httpUrlResponse = response as? HTTPURLResponse
             {
+                if httpUrlResponse.statusCode != 200 {
+                    if httpUrlResponse.statusCode == 401 {
+                        handler(.failure(UserError.unauthorized))
+                    }else{
+                        handler(.failure(UserError.fetching))
+                    }
+                    return
+                }
+                
                 if let bearer:String = httpUrlResponse.allHeaderFields["Authorization"] as? String{
                     let bearerComponents = bearer.components(separatedBy: " ")
                     DispatchQueue.main.async() {
                         if (bearerComponents.count > 1){
                         let token = bearerComponents[1]
-                        
                             self.tokenString = token
                         }
                     }
