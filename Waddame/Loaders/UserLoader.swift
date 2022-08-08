@@ -284,29 +284,14 @@ class UserLoader: ObservableObject {
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if AppUtil.isInDebugMode {
-                print("-----> data: \(String(describing: data))")
-                print("-----> error: \(String(describing: error))")
-            }
-            
-            do{
-                if(data != nil){
-                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
-                    if AppUtil.isInDebugMode {
-                        print("-----> jsondata: \(String(describing: json))")
-                    }
-
-                    if let details = json?["details"],
-                    let contentDictionnarys = details as? [NSDictionary],
-                    let contentDictionnary = contentDictionnarys[0] as? NSDictionary,
-                    let pathDict = contentDictionnary["path"] as? [String],
-                    let path = pathDict[0] as? String {
+            if(data != nil){
+                do {
+                    let errorModel = try JSONDecoder().decode(MongooseError.self, from: data!)
+                    if let path = errorModel.details.first?.path[0] {
                         handler(.failure(UserError.data(path)))
                         return
                     }
-                }
-            }catch{
-                print("Impossible to print data")
+                } catch  {}
             }
             
             if let httpUrlResponse = response as? HTTPURLResponse
