@@ -287,10 +287,9 @@ class UserLoader: ObservableObject {
             if(data != nil){
                 do {
                     let errorModel = try JSONDecoder().decode(MongooseError.self, from: data!)
-                    if let path = errorModel.details.first?.path[0] {
-                        handler(.failure(UserError.data(path)))
-                        return
-                    }
+                    let path = errorModel.path[0]
+                    handler(.failure(UserError.data(path)))
+                    return
                 } catch  {}
             }
             

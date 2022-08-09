@@ -7,17 +7,6 @@ import Foundation
 
 // MARK: - MongooseError
 struct MongooseError: Codable {
-    let original: Original
-    let details: [Detail]
-
-    enum CodingKeys: String, CodingKey {
-        case original = "_original"
-        case details
-    }
-}
-
-// MARK: - Detail
-struct Detail: Codable {
     let message: String
     let path: [String]
     let type: String
@@ -26,10 +15,7 @@ struct Detail: Codable {
 
 // MARK: - Context
 struct Context: Codable {
-    let label, value, key: String
-}
-
-// MARK: - Original
-struct Original: Codable {
-    let password, login: String
+    let value: String
+    let invalids: [String]?
+    let label, key: String
 }

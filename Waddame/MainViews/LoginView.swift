@@ -86,7 +86,7 @@ struct LoginForm: View {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .padding(.bottom, 10)
+                    .border((errorMesageString == "form_login_error" || viewError1) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .login)
                     .onSubmit {
                         if login.count < 2 {
@@ -108,7 +108,7 @@ struct LoginForm: View {
                     .padding()
                         .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .padding(.bottom, 10)
+                    .border((errorMesageString == "form_password_error" || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .password)
                     .onSubmit {
                         if password.count < 3 {
@@ -134,6 +134,8 @@ struct LoginForm: View {
                     ]
                     
                     func treatError (with error:Error){
+                        viewError1 = false
+                        viewError2 = false
                         if AppUtil.isInDebugMode {
                             print(error.localizedDescription)
                         }
@@ -142,8 +144,10 @@ struct LoginForm: View {
                                 switch path {
                                 case "login":
                                     errorMesageString = "form_login_error"
+                                    focusedField = .login
                                 case "password":
                                     errorMesageString = "form_password_error"
+                                    focusedField = .password
                                 default:
                                     break
                                 }
