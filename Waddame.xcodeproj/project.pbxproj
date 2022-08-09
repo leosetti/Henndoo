@@ -29,6 +29,7 @@
 		6FB0A871289D4ADA0066A186 /* ObservableStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0A870289D4ADA0066A186 /* ObservableStructs.swift */; };
 		6FB0A873289D72470066A186 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0A872289D72470066A186 /* PopUpWindow.swift */; };
 		6FB0A87528A1B21F0066A186 /* MongooseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0A87428A1B21E0066A186 /* MongooseError.swift */; };
+		6FB0A87728A2954A0066A186 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB0A87628A295490066A186 /* Launch Screen.storyboard */; };
 		6FE09D502881F31F00B53EE7 /* WaddameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */; };
 		6FE09D522881F31F00B53EE7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE09D512881F31F00B53EE7 /* LoginView.swift */; };
 		6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FE09D532881F32000B53EE7 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		6FB0A870289D4ADA0066A186 /* ObservableStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableStructs.swift; sourceTree = "<group>"; };
 		6FB0A872289D72470066A186 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		6FB0A87428A1B21E0066A186 /* MongooseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongooseError.swift; sourceTree = "<group>"; };
+		6FB0A87628A295490066A186 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6FE09D4C2881F31F00B53EE7 /* Waddame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waddame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FE09D4F2881F31F00B53EE7 /* WaddameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaddameApp.swift; sourceTree = "<group>"; };
 		6FE09D512881F31F00B53EE7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				6FE09D532881F32000B53EE7 /* Assets.xcassets */,
 				6FE09D552881F32000B53EE7 /* Preview Content */,
 				6FE09D7D2881FB2800B53EE7 /* Localizable.strings */,
+				6FB0A87628A295490066A186 /* Launch Screen.storyboard */,
 			);
 			path = Waddame;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			files = (
 				6FE09D572881F32000B53EE7 /* Preview Assets.xcassets in Resources */,
 				6FE09D7B2881FB2800B53EE7 /* Localizable.strings in Resources */,
+				6FB0A87728A2954A0066A186 /* Launch Screen.storyboard in Resources */,
 				6FE09D542881F32000B53EE7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +548,7 @@
 				INFOPLIST_FILE = Waddame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -664,6 +669,7 @@
 				INFOPLIST_FILE = Waddame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -844,6 +850,7 @@
 				INFOPLIST_FILE = Waddame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -874,6 +881,7 @@
 				INFOPLIST_FILE = Waddame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

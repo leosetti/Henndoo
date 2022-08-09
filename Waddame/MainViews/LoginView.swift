@@ -33,7 +33,7 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
-struct LoginText: View {
+fileprivate struct LoginText: View {
     var label: LocalizedStringKey = "login"
     var body: some View {
         Text(label)
@@ -43,7 +43,7 @@ struct LoginText: View {
     }
 }
 
-struct WelcomeImage: View {
+fileprivate struct WelcomeImage: View {
     var body: some View {
         Image("userImage")
             .resizable()
@@ -55,7 +55,7 @@ struct WelcomeImage: View {
     }
 }
 
-struct LoginForm: View {
+fileprivate struct LoginForm: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
     @EnvironmentObject var popUpObject: PopUpObject
@@ -189,7 +189,7 @@ struct LoginForm: View {
     }
 }
 
-struct LoginButtonContent: View {
+fileprivate struct LoginButtonContent: View {
     var loginlabel: LocalizedStringKey = "login_action"
     
     var body: some View {
