@@ -43,3 +43,15 @@
 "form_password_error" = "Format de mot de passe incorrect";
 "form_password_error_1" = "Mot de passe trop court";
 "form_password_error_2" = "Mot de passe trop long";
+"form_email_error" = "Mauvais format de courriel";
+"form_email_error_1" = "Courriel trop court";
+"form_email_error_2" = "Courriel trop long";
+"form_firstname_error" = "Mauvais format de prénom";
+"form_firstname_error_1" = "Prénom trop court";
+"form_firstname_error_2" = "Prénom trop long";
+"form_lastname_error" = "Mauvais format de nom";
+"form_lastname_error_1" = "Nom trop court";
+"form_lastname_error_2" = "Nom trop long";
+"form_username_error" = "Mausvais format de nom d'usager";
+"form_username_error_1" = "Nom d'usager trop court";
+"form_username_error_2" = "Nom d'usager trop long";

@@ -92,9 +92,11 @@ fileprivate struct LoginForm: View {
                         if login.count < 2 {
                             viewError1 = true
                             loginError = "form_login_error_1"
+                            focusedField = .login
                         }else if login.count > 50 {
                             viewError1 = true
                             loginError = "form_login_error_2"
+                            focusedField = .login
                         }else {
                             viewError1 = false
                             focusedField = .password
@@ -114,9 +116,11 @@ fileprivate struct LoginForm: View {
                         if password.count < 3 {
                             viewError2 = true
                             passwordError = "form_password_error_1"
+                            focusedField = .password
                         }else if password.count > 30 {
                             viewError2 = true
                             passwordError = "form_password_error_2"
+                            focusedField = .password
                         }else {
                             viewError2 = false
                         }

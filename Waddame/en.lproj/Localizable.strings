@@ -43,5 +43,16 @@
 "form_password_error" = "Wrong password format";
 "form_password_error_1" = "Password too short";
 "form_password_error_2" = "Password too long";
-
+"form_email_error" = "Wrong email format";
+"form_email_error_1" = "Email too short";
+"form_email_error_2" = "Email too long";
+"form_firstname_error" = "Wrong first name format";
+"form_firstname_error_1" = "First name too short";
+"form_firstname_error_2" = "First name too long";
+"form_lastname_error" = "Wrong last name format";
+"form_lastname_error_1" = "Last name short";
+"form_lastname_error_2" = "Last name too long";
+"form_username_error" = "Wrong username format";
+"form_username_error_1" = "Username too short";
+"form_username_error_2" = "Username too long";
 
