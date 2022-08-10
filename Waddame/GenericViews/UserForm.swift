@@ -251,18 +251,23 @@ struct UserForm: View {
                 case "email":
                     errorMesageString = "form_email_error"
                     focusedField = .email
+                    break
                 case "username":
                     errorMesageString = "form_username_error"
                     focusedField = .username
+                    break
                 case "firstname":
                     errorMesageString = "form_firstname_error"
                     focusedField = .firstname
+                    break
                 case "lastname":
                     errorMesageString = "form_lastname_error"
                     focusedField = .lastname
+                    break
                 case "password":
                     errorMesageString = "form_password_error"
                     focusedField = .password
+                    break
                 default:
                     break
                 }

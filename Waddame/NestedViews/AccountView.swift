@@ -15,16 +15,22 @@ struct AccountView: View {
     @State var isActive : Bool = false
     
     var editlabel: LocalizedStringKey = "edit_profile"
+    var changepwdlabel: LocalizedStringKey = "change_password"
     
     var body: some View {
         NavigationView {
             VStack {
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
+                    NavigationLink(destination: ChangePassword(rootIsActive: self.$isActive), isActive: self.$isActive) {
+                        Text(changepwdlabel)
+                            .foregroundColor(.blue)
+                    }
                     NavigationLink(destination: EditView(rootIsActive: self.$isActive), isActive: self.$isActive) {
                         Text(editlabel)
                             .foregroundColor(.blue)
                     }
+                    
                 }
                 Button(action: {
                     userManager.logoutUser()
@@ -92,7 +98,7 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        AccountView().environmentObject(UserLoader())
     }
 }
 

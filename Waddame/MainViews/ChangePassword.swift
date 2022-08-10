@@ -1,13 +1,15 @@
 //
-//  ContentView.swift
+//  ChangePassword.swift
 //  Waddame
 //
-//  Created by Leandro Setti de Almeida on 2022-07-15.
+//  Created by Leandro Setti de Almeida on 2022-08-10.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct ChangePassword: View {
+    @Binding var rootIsActive : Bool
+    
     @EnvironmentObject var viewRouter: ViewRouter
     @StateObject private var userObject = UserObject()
     
@@ -17,24 +19,22 @@ struct LoginView: View {
         NavigationView {
             ScrollView{
                 VStack {
-                    LoginText()
-                    WelcomeImage()
-                    LoginForm()
-                    NavView(content: {SignupView()}, text: signuplabel)
+                    TitleText()
+                    PasswordForm(rootIsActive:$rootIsActive)
                 }.padding()
             }
         }.environmentObject(userObject)
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct ChangePassword_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
 
-fileprivate struct LoginText: View {
-    var label: LocalizedStringKey = "login"
+fileprivate struct TitleText: View {
+    var label: LocalizedStringKey = "change_password"
     var body: some View {
         Text(label)
             .font(.largeTitle)
@@ -43,84 +43,74 @@ fileprivate struct LoginText: View {
     }
 }
 
-fileprivate struct WelcomeImage: View {
-    var body: some View {
-        Image("userImage")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
-            .clipped()
-            .cornerRadius(150)
-            .padding(.bottom, 50)
-    }
-}
-
-fileprivate struct LoginForm: View {
+fileprivate struct PasswordForm: View {
+    @Binding var rootIsActive : Bool
+    
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
     @EnvironmentObject var popUpObject: PopUpObject
     
-    @State var login: String = ""
-    @State var password: String = ""
+    @State var oldpassword: String = ""
+    @State var newpassword: String = ""
     
-    var loginlabel: LocalizedStringKey = "login"
-    var pwdlabel: LocalizedStringKey = "password"
+    var oldpwdlabel: LocalizedStringKey = "old_password"
+    var pwdlabel: LocalizedStringKey = "new_password"
     
-    @State var errorMesageString: LocalizedStringKey = "loginError"
+    @State var errorMesageString: LocalizedStringKey = "popup_error"
     
     enum Field: Hashable {
-        case login
-        case password
+        case oldpassword
+        case newpassword
     }
     @FocusState private var focusedField: Field?
     
-    @State var loginError: LocalizedStringKey = "loginError"
+    @State var oldpasswordError: LocalizedStringKey = "form_password_error"
     @State var viewError1: Bool = false
-    @State var passwordError: LocalizedStringKey = "loginError"
+    @State var passwordError: LocalizedStringKey = "form_password_error"
     @State var viewError2: Bool = false
     
     var body: some View {
         VStack{
             Section{
-                TextField(loginlabel, text: $login)
+                TextField(oldpwdlabel, text: $oldpassword)
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_login_error" || viewError1) ? .red : .clear, width: 1)
-                    .focused($focusedField, equals: .login)
+                    .border((errorMesageString == "form_oldpassword_error" || viewError1) ? .red : .clear, width: 1)
+                    .focused($focusedField, equals: .oldpassword)
                     .onSubmit {
-                        if login.count < 2 {
+                        if oldpassword.count < 3 {
                             viewError1 = true
-                            loginError = "form_login_error_1"
-                            focusedField = .login
-                        }else if login.count > 50 {
+                            oldpasswordError = "form_password_error_1"
+                            focusedField = .oldpassword
+                        }else if oldpassword.count > 30 {
                             viewError1 = true
-                            loginError = "form_login_error_2"
-                            focusedField = .login
+                            oldpasswordError = "form_password_error_2"
+                            focusedField = .oldpassword
                         }else {
                             viewError1 = false
-                            focusedField = .password
+                            focusedField = .newpassword
                         }
                     }
-                Text(loginError)
+                Text(oldpasswordError)
                     .isHidden(!viewError1)
                     .frame(maxHeight: viewError1 ? 30 : 0)
                     .foregroundColor(.red)
-                SecureField(pwdlabel, text: $password)
+                TextField(pwdlabel, text: $newpassword)
                     .padding()
                         .background(lightGreyColor)
                     .cornerRadius(5.0)
                     .border((errorMesageString == "form_password_error" || viewError2) ? .red : .clear, width: 1)
-                    .focused($focusedField, equals: .password)
+                    .focused($focusedField, equals: .newpassword)
                     .onSubmit {
-                        if password.count < 3 {
+                        if newpassword.count < 3 {
                             viewError2 = true
                             passwordError = "form_password_error_1"
-                            focusedField = .password
-                        }else if password.count > 30 {
+                            focusedField = .newpassword
+                        }else if newpassword.count > 30 {
                             viewError2 = true
                             passwordError = "form_password_error_2"
-                            focusedField = .password
+                            focusedField = .newpassword
                         }else {
                             viewError2 = false
                         }
@@ -133,8 +123,8 @@ fileprivate struct LoginForm: View {
             Section{
                 Button(action: {
                     let body: [String: Any] = [
-                        "login": login,
-                        "password": password
+                        "oldpassword": oldpassword,
+                        "newpassword": newpassword
                     ]
                     
                     func treatError (with error:Error){
@@ -146,13 +136,17 @@ fileprivate struct LoginForm: View {
                         switch error {
                             case UserLoader.UserError.data(let path):
                                 switch path {
-                                case "login":
-                                    errorMesageString = "form_login_error"
-                                    focusedField = .login
+                                case "oldpassword":
+                                    errorMesageString = "form_oldpassword_error"
+                                    focusedField = .oldpassword
+                                    viewError1 = true
+                                    viewError2 = false
                                     break
                                 case "password":
                                     errorMesageString = "form_password_error"
-                                    focusedField = .password
+                                    focusedField = .newpassword
+                                    viewError2 = true
+                                    viewError1 = false
                                     break
                                 default:
                                     break
@@ -162,7 +156,7 @@ fileprivate struct LoginForm: View {
                             break
                             
                             default:
-                            errorMesageString = "loginError"
+                            errorMesageString = "form_password_error"
                             }
                         
                     
@@ -173,30 +167,36 @@ fileprivate struct LoginForm: View {
                         }
                     }
                     
-                    userManager.loginUser(withObject: body, then: {result in
+                    userManager.changeUserPassword(withObject: body, then: {result in
                         switch result {
                         case .success :
-                        DispatchQueue.main.async() {
-                                viewRouter.currentScreen = .main
-                        }
-                        break
+                            viewError1 = false
+                            viewError2 = false
+                            errorMesageString = "popup_error"
+                            DispatchQueue.main.async() {
+                                popUpObject.title = "popup_account_success"
+                                popUpObject.message = "popup_account_password_changed"
+                                popUpObject.handler = {rootIsActive = false}
+                                popUpObject.show.toggle()
+                            }
+                            break
                         case .failure(let error) :
                             treatError(with: error)
                         }
                     })
                     
                 }) {
-                    LoginButtonContent()
+                    ButtonContent()
                 }
             }
         }.onAppear() {
-            focusedField = .login
+            focusedField = .oldpassword
         }
     }
 }
 
-fileprivate struct LoginButtonContent: View {
-    var loginlabel: LocalizedStringKey = "login_action"
+fileprivate struct ButtonContent: View {
+    var loginlabel: LocalizedStringKey = "change_action"
     
     var body: some View {
         Text(loginlabel)

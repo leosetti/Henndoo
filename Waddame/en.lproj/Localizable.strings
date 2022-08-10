@@ -11,6 +11,8 @@
 "firstname" = "First name";
 "lastname" = "Last name";
 "password" = "Password";
+"old_password" = "Old password";
+"new_password" = "New password";
 "email" = "Email";
 "login" = "Login";
 "login_action" = "Login";
@@ -19,14 +21,17 @@
 "signup_action" = "Sign-up";
 "edit_profile" = "Edit my profile";
 "edit_action" = "Edit";
+"change_action" = "Change";
 
 "my_account" = "My account";
 "home" = "Home";
 "profile" = "Profile";
 "loading" = "Loading...";
 "account_close" = "Close account";
+"change_password" = "Change password";
 
 "popup_account_success" = "Success!";
+"popup_account_password_changed" = "Password changed successfully";
 "popup_account_message" = "Account information updated";
 "popup_account_deleted" = "Your account has been deleted";
 "popup_warning" = "Warning";
@@ -41,6 +46,7 @@
 "form_login_error_1" = "Login too short";
 "form_login_error_2" = "Login too long";
 "form_password_error" = "Wrong password format";
+"form_oldpassword_error" = "Wrong password format";
 "form_password_error_1" = "Password too short";
 "form_password_error_2" = "Password too long";
 "form_email_error" = "Wrong email format";
