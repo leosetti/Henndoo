@@ -22,15 +22,10 @@ struct AccountView: View {
             VStack {
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
-                    NavigationLink(destination: ChangePassword(rootIsActive: self.$isActive), isActive: self.$isActive) {
-                        Text(changepwdlabel)
-                            .foregroundColor(.blue)
-                    }
-                    NavigationLink(destination: EditView(rootIsActive: self.$isActive), isActive: self.$isActive) {
-                        Text(editlabel)
-                            .foregroundColor(.blue)
-                    }
                     
+                    NavigationLink(destination: EditProfileView(rootIsActive: self.$isActive), isActive: self.$isActive) {
+                        EditButtonView()
+                    }
                 }
                 Button(action: {
                     userManager.logoutUser()
@@ -120,6 +115,21 @@ fileprivate struct AccountText: View {
         Text(user.email)
             .font(.body)
             .padding(.bottom, 20)
+    }
+}
+
+fileprivate struct EditButtonView: View {
+    var label: LocalizedStringKey = "edit_profile"
+    
+    var body: some View {
+        Text(label)
+            .textCase(.uppercase)
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 220, height: 60)
+            .background(Color.green)
+            .cornerRadius(15.0)
     }
 }
 
