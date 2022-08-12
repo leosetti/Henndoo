@@ -91,9 +91,12 @@ fileprivate struct LoginForm: View {
                     .border((hasError1 || viewError1) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .login)
                     .onSubmit {
+                        viewError1 = false
+                        viewError2 = false
+                        hasError1 = false
+                        hasError2 = false
                         if (login.count < 2 || login.count > 50) {
                             viewError1 = true
-                            viewError2 = false
                             let l1 = 3
                             let l2 = 50
                             let st1 = String(localized: "login")
@@ -112,12 +115,15 @@ fileprivate struct LoginForm: View {
                     .padding()
                         .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_password_error" || viewError2) ? .red : .clear, width: 1)
+                    .border((hasError2 || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .password)
                     .onSubmit {
+                        viewError1 = false
+                        viewError2 = false
+                        hasError1 = false
+                        hasError2 = false
                         if (password.count < 3 || password.count > 30) {
                             viewError2 = true
-                            viewError1 = false
                             let l1 = 4
                             let l2 = 30
                             let st1 = String(localized: "password")

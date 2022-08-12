@@ -105,13 +105,19 @@ struct UserForm: View {
                     .cornerRadius(5.0)
                     .border((hasError2 || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .username)
-                    /*.onSubmit {
+                    .onSubmit {
+                        viewError1 = false
+                        viewError2 = false
+                        viewError3 = false
+                        viewError4 = false
+                        viewError5 = false
+                        hasError1 = false
+                        hasError2 = false
+                        hasError3 = false
+                        hasError4 = false
+                        hasError5 = false
                         if (username.count < 2 || username.count > 50) {
-                            viewError1 = false
                             viewError2 = true
-                            viewError3 = false
-                            viewError4 = false
-                            viewError5 = false
                             let l1 = 3
                             let l2 = 50
                             let st1 = String(localized: "username")
@@ -121,7 +127,7 @@ struct UserForm: View {
                             viewError2 = false
                             focusedField = .firstname
                         }
-                    }*/
+                    }
                 Text(usernameError)
                     .isHidden(!viewError2)
                     .frame(maxHeight: viewError2 ? 30 : 0)
@@ -133,12 +139,18 @@ struct UserForm: View {
                     .border((hasError3 || viewError3) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .firstname)
                     .onSubmit {
+                        viewError1 = false
+                        viewError2 = false
+                        viewError3 = false
+                        viewError4 = false
+                        viewError5 = false
+                        hasError1 = false
+                        hasError2 = false
+                        hasError3 = false
+                        hasError4 = false
+                        hasError5 = false
                         if (firstname.count < 2 || firstname.count > 50) {
-                            viewError1 = false
-                            viewError2 = false
                             viewError3 = true
-                            viewError4 = false
-                            viewError5 = false
                             let l1 = 3
                             let l2 = 50
                             let st1 = String(localized: "firstname")
@@ -160,12 +172,18 @@ struct UserForm: View {
                     .border((hasError4 || viewError4) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .lastname)
                     .onSubmit {
+                        viewError1 = false
+                        viewError2 = false
+                        viewError3 = false
+                        viewError4 = false
+                        viewError5 = false
+                        hasError1 = false
+                        hasError2 = false
+                        hasError3 = false
+                        hasError4 = false
+                        hasError5 = false
                         if lastname.count < 2 || lastname.count > 50 {
-                            viewError1 = false
-                            viewError2 = false
-                            viewError3 = false
                             viewError4 = true
-                            viewError5 = false
                             let l1 = 3
                             let l2 = 50
                             let st1 = String(localized: "lastname")
@@ -191,11 +209,17 @@ struct UserForm: View {
                         .border((hasError5 || viewError5) ? .red : .clear, width: 1)
                         .focused($focusedField, equals: .password)
                         .onSubmit {
+                            viewError1 = false
+                            viewError2 = false
+                            viewError3 = false
+                            viewError4 = false
+                            viewError5 = false
+                            hasError1 = false
+                            hasError2 = false
+                            hasError3 = false
+                            hasError4 = false
+                            hasError5 = false
                             if (password.count < 3 || password.count > 30) {
-                                viewError1 = false
-                                viewError2 = false
-                                viewError3 = false
-                                viewError4 = false
                                 viewError5 = true
                                 let l1 = 4
                                 let l2 = 30

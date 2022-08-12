@@ -143,18 +143,14 @@ fileprivate struct PasswordForm: View {
                                 case "oldpassword":
                                     let st1 = String(localized: "old_password")
                                     errorMesageString = "form_error_2 \(st1)"
-                                    hasError1 = true
-                                    focusedField = .oldpassword
                                     viewError1 = true
-                                    viewError2 = false
+                                    focusedField = .oldpassword
                                     break
                                 case "newpassword":
                                     let st1 = String(localized: "new_password")
                                     errorMesageString = "form_error_2 \(st1)"
-                                    hasError2 = true
-                                    focusedField = .newpassword
                                     viewError2 = true
-                                    viewError1 = false
+                                    focusedField = .newpassword
                                     break
                                 default:
                                     break
