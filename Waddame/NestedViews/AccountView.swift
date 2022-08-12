@@ -12,7 +12,7 @@ struct AccountView: View {
     @EnvironmentObject var userManager: UserLoader
     @StateObject private var userObject = UserObject()
     @EnvironmentObject var popUpObject: PopUpObject
-    @State var isActive : Bool = false
+    @State var isNavLinkActive : Bool = false
     
     var editlabel: LocalizedStringKey = "edit_profile"
     var changepwdlabel: LocalizedStringKey = "change_password"
@@ -20,12 +20,16 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
                     
-                    NavigationLink(destination: EditProfileView(rootIsActive: self.$isActive), isActive: self.$isActive) {
-                        EditButtonView()
+                    if viewRouter.currentScreen != .account {
+                        NavigationLink(destination: EditProfileView(), isActive: self.$isNavLinkActive) {
+                            EditButtonView()
+                        }
                     }
+                    
                 }
                 Button(action: {
                     userManager.logoutUser()
@@ -46,6 +50,7 @@ struct AccountView: View {
             }
             .padding()
             .onAppear(){
+                viewRouter.currentScreen = .main
                 userManager.getUser(withID: "self", then: { result in
                     switch result {
                         case .success(let userFromResult):

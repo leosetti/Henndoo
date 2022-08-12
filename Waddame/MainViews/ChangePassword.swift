@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ChangePassword: View {
-    @Binding var rootIsActive : Bool
-    
     @EnvironmentObject var viewRouter: ViewRouter
     @StateObject private var userObject = UserObject()
     
@@ -20,7 +18,7 @@ struct ChangePassword: View {
             ScrollView{
                 VStack {
                     TitleText()
-                    PasswordForm(rootIsActive:$rootIsActive)
+                    PasswordForm()
                 }.padding()
             }
         }.environmentObject(userObject)
@@ -44,8 +42,6 @@ fileprivate struct TitleText: View {
 }
 
 fileprivate struct PasswordForm: View {
-    @Binding var rootIsActive : Bool
-    
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var userManager: UserLoader
     @EnvironmentObject var popUpObject: PopUpObject
@@ -143,13 +139,13 @@ fileprivate struct PasswordForm: View {
                                 case "oldpassword":
                                     let st1 = String(localized: "old_password")
                                     errorMesageString = "form_error_2 \(st1)"
-                                    viewError1 = true
+                                    hasError1 = true
                                     focusedField = .oldpassword
                                     break
                                 case "newpassword":
                                     let st1 = String(localized: "new_password")
                                     errorMesageString = "form_error_2 \(st1)"
-                                    viewError2 = true
+                                    hasError2 = true
                                     focusedField = .newpassword
                                     break
                                 default:
@@ -167,7 +163,7 @@ fileprivate struct PasswordForm: View {
                         DispatchQueue.main.async() {
                             popUpObject.title = "popup_error"
                             popUpObject.message = errorMesageString
-                            popUpObject.handler = {rootIsActive = true}
+                            popUpObject.handler = {}
                             popUpObject.show.toggle()
                         }
                     }
@@ -177,11 +173,15 @@ fileprivate struct PasswordForm: View {
                         case .success :
                             viewError1 = false
                             viewError2 = false
+                            hasError1 = false
+                            hasError2 = false
                             errorMesageString = "popup_error"
                             DispatchQueue.main.async() {
                                 popUpObject.title = "popup_account_success"
                                 popUpObject.message = "popup_account_password_changed"
-                                popUpObject.handler = {rootIsActive = false}
+                                popUpObject.handler = {
+                                    viewRouter.currentScreen = .account
+                                }
                                 popUpObject.show.toggle()
                             }
                             break

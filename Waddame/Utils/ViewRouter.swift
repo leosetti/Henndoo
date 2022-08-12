@@ -11,6 +11,7 @@ import SwiftUI
 enum Screen {
     case login
     case main
+    case account
 }
 
 class ViewRouter: ObservableObject {

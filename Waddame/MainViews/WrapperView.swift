@@ -26,7 +26,7 @@ struct WrapperView: View {
                     switch viewRouter.currentScreen {
                     case .login:
                         LoginView()
-                    case .main:
+                    default:
                         MainView()
                     }
                 }

@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct EditView: View {
-    @Binding var rootIsActive : Bool
-    
     var body: some View {
         ScrollView{
             VStack {
                 EditText()
-                UserForm(rootIsActive: self.$rootIsActive, type:.edit)
+                UserForm(type:.edit)
             }.padding()
         }
     }
@@ -22,7 +20,7 @@ struct EditView: View {
 
 struct EditView_Previews: PreviewProvider {
     static var previews: some View {
-        EditView(rootIsActive: .constant(false))
+        EditView()
     }
 }
 

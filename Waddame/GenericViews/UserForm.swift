@@ -15,7 +15,6 @@ enum UserFormContext {
 struct UserForm: View {
     @State private var didFinishEditing: Bool = false
     
-    @Binding var rootIsActive : Bool
     var type: UserFormContext = .signup
     
     @EnvironmentObject var viewRouter: ViewRouter
@@ -65,7 +64,6 @@ struct UserForm: View {
     func popToRoot() {
         DispatchQueue.main.async() {
             viewRouter.currentScreen = .main
-            self.rootIsActive = false
         }
     }
         
@@ -342,6 +340,9 @@ struct UserForm: View {
                                     self.didFinishEditing = true
                                     popUpObject.title = "popup_account_success"
                                     popUpObject.message = "popup_account_message"
+                                    popUpObject.handler = {
+                                        viewRouter.currentScreen = .account
+                                    }
                                     popUpObject.show.toggle()
                                 }
                             break
