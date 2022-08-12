@@ -48,34 +48,47 @@ struct UserForm: View {
     
     @State var emailError: LocalizedStringKey = "createUserError"
     @State var viewError1: Bool = false
+    @State var hasError1: Bool = false
     @State var usernameError: LocalizedStringKey = "createUserError"
     @State var viewError2: Bool = false
+    @State var hasError2: Bool = false
     @State var firstnameError: LocalizedStringKey = "createUserError"
     @State var viewError3: Bool = false
+    @State var hasError3: Bool = false
     @State var lastnameError: LocalizedStringKey = "createUserError"
     @State var viewError4: Bool = false
+    @State var hasError4: Bool = false
     @State var passwordError: LocalizedStringKey = "createUserError"
     @State var viewError5: Bool = false
+    @State var hasError5: Bool = false
 
+    func popToRoot() {
+        DispatchQueue.main.async() {
+            viewRouter.currentScreen = .main
+            self.rootIsActive = false
+        }
+    }
         
     var body: some View {
-        
         ZStack{
             VStack{
                 TextField(emaillabel, text: $email)
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_email_error" || viewError1) ? .red : .clear, width: 1)
+                    .border((hasError1 || viewError1) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .email)
                     .onSubmit {
-                        if email.count < 2 {
+                        if (email.count < 2 || email.count > 50) {
                             viewError1 = true
-                            emailError = "form_email_error_1"
-                            focusedField = .email
-                        }else if email.count > 50 {
-                            viewError1 = true
-                            emailError = "form_email_error_2"
+                            viewError2 = false
+                            viewError3 = false
+                            viewError4 = false
+                            viewError5 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "email")
+                            emailError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .email
                         }else {
                             viewError1 = false
@@ -90,22 +103,25 @@ struct UserForm: View {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_username_error" || viewError2) ? .red : .clear, width: 1)
+                    .border((hasError2 || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .username)
-                    .onSubmit {
-                        if username.count < 2 {
+                    /*.onSubmit {
+                        if (username.count < 2 || username.count > 50) {
+                            viewError1 = false
                             viewError2 = true
-                            usernameError = "form_username_error_1"
-                            focusedField = .username
-                        }else if username.count > 50 {
-                            viewError2 = true
-                            usernameError = "form_username_error_2"
+                            viewError3 = false
+                            viewError4 = false
+                            viewError5 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "username")
+                            usernameError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .username
                         }else {
                             viewError2 = false
                             focusedField = .firstname
                         }
-                    }
+                    }*/
                 Text(usernameError)
                     .isHidden(!viewError2)
                     .frame(maxHeight: viewError2 ? 30 : 0)
@@ -114,16 +130,19 @@ struct UserForm: View {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_firstname_error" || viewError3) ? .red : .clear, width: 1)
+                    .border((hasError3 || viewError3) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .firstname)
                     .onSubmit {
-                        if firstname.count < 2 {
+                        if (firstname.count < 2 || firstname.count > 50) {
+                            viewError1 = false
+                            viewError2 = false
                             viewError3 = true
-                            firstnameError = "form_firstname_error_1"
-                            focusedField = .firstname
-                        }else if firstname.count > 50 {
-                            viewError3 = true
-                            firstnameError = "form_firstname_error_2"
+                            viewError4 = false
+                            viewError5 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "firstname")
+                            firstnameError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .firstname
                         }else {
                             viewError3 = false
@@ -138,19 +157,22 @@ struct UserForm: View {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_lastname_error" || viewError4) ? .red : .clear, width: 1)
+                    .border((hasError4 || viewError4) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .lastname)
                     .onSubmit {
-                        if lastname.count < 2 {
-                            viewError5 = true
-                            lastnameError = "form_lastname_error_1"
-                            focusedField = .lastname
-                        }else if lastname.count > 50 {
-                            viewError5 = true
-                            lastnameError = "form_lastname_error_2"
+                        if lastname.count < 2 || lastname.count > 50 {
+                            viewError1 = false
+                            viewError2 = false
+                            viewError3 = false
+                            viewError4 = true
+                            viewError5 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "lastname")
+                            lastnameError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .lastname
                         }else {
-                            viewError5 = false
+                            viewError4 = false
                             if type == .signup {
                                 focusedField = .password
                             }
@@ -163,24 +185,27 @@ struct UserForm: View {
                 
                 if type == .signup {
                     SecureField(pwdlabel, text: $password)
-                                    .padding()
-                                    .background(lightGreyColor)
-                                    .cornerRadius(5.0)
-                                    .border((errorMesageString == "form_password_error" || viewError5) ? .red : .clear, width: 1)
-                                    .focused($focusedField, equals: .password)
-                                    .onSubmit {
-                                        if password.count < 3 {
-                                            viewError5 = true
-                                            passwordError = "form_password_error_1"
-                                            focusedField = .password
-                                        }else if password.count > 30 {
-                                            viewError5 = true
-                                            passwordError = "form_password_error_2"
-                                            focusedField = .password
-                                        }else {
-                                            viewError5 = false
-                                        }
-                                    }
+                        .padding()
+                        .background(lightGreyColor)
+                        .cornerRadius(5.0)
+                        .border((hasError5 || viewError5) ? .red : .clear, width: 1)
+                        .focused($focusedField, equals: .password)
+                        .onSubmit {
+                            if (password.count < 3 || password.count > 30) {
+                                viewError1 = false
+                                viewError2 = false
+                                viewError3 = false
+                                viewError4 = false
+                                viewError5 = true
+                                let l1 = 4
+                                let l2 = 30
+                                let st1 = String(localized: "password")
+                                passwordError = "form_error_1 \(st1) \(l1) \(l2)"
+                                focusedField = .password
+                            }else {
+                                viewError5 = false
+                            }
+                        }
                     Text(passwordError)
                         .isHidden(!viewError5)
                         .frame(maxHeight: viewError5 ? 30 : 0)
@@ -210,13 +235,105 @@ struct UserForm: View {
                         body["password"] = password
                     }
                     
+                    func treatError (with error:Error){
+                        viewError1 = false
+                        viewError2 = false
+                        viewError3 = false
+                        viewError4 = false
+                        viewError5 = false
+                        hasError1 = false
+                        hasError2 = false
+                        hasError3 = false
+                        hasError4 = false
+                        hasError5 = false
+                        if AppUtil.isInDebugMode {
+                            print(error.localizedDescription)
+                        }
+                        switch error {
+                            case UserLoader.UserError.data(let path):
+                                switch path {
+                                case "email":
+                                    let st1 = String(localized: "email")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError1 = true
+                                    focusedField = .email
+                                    break
+                                case "username":
+                                    let st1 = String(localized: "username")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError2 = true
+                                    focusedField = .username
+                                    break
+                                case "firstname":
+                                    let st1 = String(localized: "firstname")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError3 = true
+                                    focusedField = .firstname
+                                    break
+                                case "lastname":
+                                    let st1 = String(localized: "lastname")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError4 = true
+                                    focusedField = .lastname
+                                    break
+                                case "password":
+                                    let st1 = String(localized: "password")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError5 = true
+                                    focusedField = .password
+                                    break
+                                default:
+                                    break
+                                }
+                            
+                            default:
+                            errorMesageString = "createUserError"
+                        }
+                        
+                    
+                        DispatchQueue.main.async() {
+                            popUpObject.title = "popup_error"
+                            popUpObject.message = errorMesageString
+                            popUpObject.show.toggle()
+                        }
+                    }
+                    
+                    func signupUser(withBody body:[String: Any] ) {
+                        userManager.createUser(withObject: body, then: {result in
+                            switch result {
+                            case .success :
+                                popToRoot()
+                            break
+                            case .failure(let error) :
+                                treatError(with: error)
+                            }
+                        })
+                    }
+                    
+                    func editUser(withBody body:[String: Any] ) {
+                        userManager.editUser(withObject: body, then: {result in
+                            switch result {
+                            case .success :
+                                DispatchQueue.main.async() {
+                                    self.didFinishEditing = true
+                                    popUpObject.title = "popup_account_success"
+                                    popUpObject.message = "popup_account_message"
+                                    popUpObject.show.toggle()
+                                }
+                            break
+                            case .failure(let error) :
+                                treatError(with: error)
+                            }
+                        })
+                    }
+                    
                     switch type {
                     case .signup:
                         signupUser(withBody: body)
                     case .edit:
                         editUser(withBody: body)
                     }
-                    
+
                 }) {
                 switch type {
                     case .signup:
@@ -236,91 +353,13 @@ struct UserForm: View {
                 }
             })
         }
+    
         
-    }
-        
-    private func treatError (with error:Error){
-        viewError1 = false
-        viewError2 = false
-        if AppUtil.isInDebugMode {
-            print(error.localizedDescription)
-        }
-        switch error {
-            case UserLoader.UserError.data(let path):
-                switch path {
-                case "email":
-                    errorMesageString = "form_email_error"
-                    focusedField = .email
-                    break
-                case "username":
-                    errorMesageString = "form_username_error"
-                    focusedField = .username
-                    break
-                case "firstname":
-                    errorMesageString = "form_firstname_error"
-                    focusedField = .firstname
-                    break
-                case "lastname":
-                    errorMesageString = "form_lastname_error"
-                    focusedField = .lastname
-                    break
-                case "password":
-                    errorMesageString = "form_password_error"
-                    focusedField = .password
-                    break
-                default:
-                    break
-                }
-            
-            default:
-            errorMesageString = "createUserError"
-            }
-        
-    
-        DispatchQueue.main.async() {
-            popUpObject.title = "popup_error"
-            popUpObject.message = errorMesageString
-            popUpObject.show.toggle()
-        }
-    }
-    
-    private func signupUser(withBody body:[String: Any] ) {
-        userManager.createUser(withObject: body, then: {result in
-            switch result {
-            case .success :
-                popToRoot()
-            break
-            case .failure(let error) :
-                treatError(with: error)
-            }
-        })
-    }
-    
-    private func popToRoot() {
-        DispatchQueue.main.async() {
-            viewRouter.currentScreen = .main
-            self.rootIsActive = false
-        }
-    }
-    
-    private func editUser(withBody body:[String: Any] ) {
-        userManager.editUser(withObject: body, then: {result in
-            switch result {
-            case .success :
-                DispatchQueue.main.async() {
-                    self.didFinishEditing = true
-                    popUpObject.title = "popup_account_success"
-                    popUpObject.message = "popup_account_message"
-                    popUpObject.show.toggle()
-                }
-            break
-            case .failure(let error) :
-                treatError(with: error)
-            }
-        })
     }
 }
 
+
+ 
 fileprivate struct SignupButtonContent: View {
     var label: LocalizedStringKey = "signup_action"
     

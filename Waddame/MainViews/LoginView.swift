@@ -76,8 +76,10 @@ fileprivate struct LoginForm: View {
     
     @State var loginError: LocalizedStringKey = "loginError"
     @State var viewError1: Bool = false
+    @State var hasError1: Bool = false
     @State var passwordError: LocalizedStringKey = "loginError"
     @State var viewError2: Bool = false
+    @State var hasError2: Bool = false
     
     var body: some View {
         VStack{
@@ -86,16 +88,16 @@ fileprivate struct LoginForm: View {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_login_error" || viewError1) ? .red : .clear, width: 1)
+                    .border((hasError1 || viewError1) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .login)
                     .onSubmit {
-                        if login.count < 2 {
+                        if (login.count < 2 || login.count > 50) {
                             viewError1 = true
-                            loginError = "form_login_error_1"
-                            focusedField = .login
-                        }else if login.count > 50 {
-                            viewError1 = true
-                            loginError = "form_login_error_2"
+                            viewError2 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "login")
+                            loginError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .login
                         }else {
                             viewError1 = false
@@ -104,7 +106,7 @@ fileprivate struct LoginForm: View {
                     }
                 Text(loginError)
                     .isHidden(!viewError1)
-                    .frame(maxHeight: viewError1 ? 30 : 0)
+                    .frame(maxHeight: viewError1 ? 60 : 0)
                     .foregroundColor(.red)
                 SecureField(pwdlabel, text: $password)
                     .padding()
@@ -113,13 +115,13 @@ fileprivate struct LoginForm: View {
                     .border((errorMesageString == "form_password_error" || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .password)
                     .onSubmit {
-                        if password.count < 3 {
+                        if (password.count < 3 || password.count > 30) {
                             viewError2 = true
-                            passwordError = "form_password_error_1"
-                            focusedField = .password
-                        }else if password.count > 30 {
-                            viewError2 = true
-                            passwordError = "form_password_error_2"
+                            viewError1 = false
+                            let l1 = 4
+                            let l2 = 30
+                            let st1 = String(localized: "password")
+                            passwordError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .password
                         }else {
                             viewError2 = false
@@ -127,7 +129,7 @@ fileprivate struct LoginForm: View {
                     }
                 Text(passwordError)
                     .isHidden(!viewError2)
-                    .frame(maxHeight: viewError2 ? 30 : 0)
+                    .frame(maxHeight: viewError2 ? 60 : 0)
                     .foregroundColor(.red)
             }
             Section{
@@ -140,6 +142,8 @@ fileprivate struct LoginForm: View {
                     func treatError (with error:Error){
                         viewError1 = false
                         viewError2 = false
+                        hasError1 = false
+                        hasError2 = false
                         if AppUtil.isInDebugMode {
                             print(error.localizedDescription)
                         }
@@ -147,11 +151,15 @@ fileprivate struct LoginForm: View {
                             case UserLoader.UserError.data(let path):
                                 switch path {
                                 case "login":
-                                    errorMesageString = "form_login_error"
+                                    let st1 = String(localized: "login")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError1 = true
                                     focusedField = .login
                                     break
                                 case "password":
-                                    errorMesageString = "form_password_error"
+                                    let st1 = String(localized: "password")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError2 = true
                                     focusedField = .password
                                     break
                                 default:

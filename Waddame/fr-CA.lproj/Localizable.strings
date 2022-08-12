@@ -42,22 +42,5 @@
 "loginError" = "Erreur de connexion";
 
 "form_login_unauthorized" = "Mauvaise combinaison de nom d'usager et mot de passse";
-"form_login_error" = "Format de login incorrect";
-"form_login_error_1" = "Login trop court";
-"form_login_error_2" = "Login trop long";
-"form_password_error" = "Format de mot de passe incorrect";
-"form_oldpassword_error" = "Format de mot de passe incorrect";
-"form_password_error_1" = "Mot de passe trop court";
-"form_password_error_2" = "Mot de passe trop long";
-"form_email_error" = "Mauvais format de courriel";
-"form_email_error_1" = "Courriel trop court";
-"form_email_error_2" = "Courriel trop long";
-"form_firstname_error" = "Mauvais format de prénom";
-"form_firstname_error_1" = "Prénom trop court";
-"form_firstname_error_2" = "Prénom trop long";
-"form_lastname_error" = "Mauvais format de nom";
-"form_lastname_error_1" = "Nom trop court";
-"form_lastname_error_2" = "Nom trop long";
-"form_username_error" = "Mausvais format de nom d'usager";
-"form_username_error_1" = "Nom d'usager trop court";
-"form_username_error_2" = "Nom d'usager trop long";
+"form_error_1 %@ %lld %lld" = "%@ doit avoir entre %lld et %lld charactères";
+"form_error_2 %@" = "%@ : valeur non valide";

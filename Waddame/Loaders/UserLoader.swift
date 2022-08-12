@@ -95,6 +95,15 @@ class UserLoader: ObservableObject {
                 print("-----> error: \(String(describing: error))")
             }
             
+            if(data != nil){
+                do {
+                    let errorModel = try JSONDecoder().decode(MongooseError.self, from: data!)
+                    let path = errorModel.path[0]
+                    handler(.failure(UserError.data(path)))
+                    return
+                } catch  {}
+            }
+            
             if let httpUrlResponse = response as? HTTPURLResponse
             {
                 if let bearer:String = httpUrlResponse.allHeaderFields["Authorization"] as? String{

@@ -66,26 +66,28 @@ fileprivate struct PasswordForm: View {
     
     @State var oldpasswordError: LocalizedStringKey = "form_password_error"
     @State var viewError1: Bool = false
+    @State var hasError1: Bool = false
     @State var passwordError: LocalizedStringKey = "form_password_error"
     @State var viewError2: Bool = false
+    @State var hasError2: Bool = false
     
     var body: some View {
         VStack{
             Section{
-                TextField(oldpwdlabel, text: $oldpassword)
+                SecureField(oldpwdlabel, text: $oldpassword)
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_oldpassword_error" || viewError1) ? .red : .clear, width: 1)
+                    .border((hasError1 || viewError1) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .oldpassword)
                     .onSubmit {
-                        if oldpassword.count < 3 {
+                        if (oldpassword.count < 3 || oldpassword.count > 30) {
                             viewError1 = true
-                            oldpasswordError = "form_password_error_1"
-                            focusedField = .oldpassword
-                        }else if oldpassword.count > 30 {
-                            viewError1 = true
-                            oldpasswordError = "form_password_error_2"
+                            viewError2 = false
+                            let l1 = 3
+                            let l2 = 50
+                            let st1 = String(localized: "old_password")
+                            oldpasswordError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .oldpassword
                         }else {
                             viewError1 = false
@@ -94,30 +96,30 @@ fileprivate struct PasswordForm: View {
                     }
                 Text(oldpasswordError)
                     .isHidden(!viewError1)
-                    .frame(maxHeight: viewError1 ? 30 : 0)
+                    .frame(maxHeight: viewError1 ? 60 : 0)
                     .foregroundColor(.red)
-                TextField(pwdlabel, text: $newpassword)
+                SecureField(pwdlabel, text: $newpassword)
                     .padding()
                         .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .border((errorMesageString == "form_password_error" || viewError2) ? .red : .clear, width: 1)
+                    .border((hasError2 || viewError2) ? .red : .clear, width: 1)
                     .focused($focusedField, equals: .newpassword)
                     .onSubmit {
-                        if newpassword.count < 3 {
+                        if (newpassword.count < 3 ||  newpassword.count > 30) {
                             viewError2 = true
-                            passwordError = "form_password_error_1"
+                            viewError1 = false
+                            let l1 = 4
+                            let l2 = 30
+                            let st1 = String(localized: "new_password")
+                            passwordError = "form_error_1 \(st1) \(l1) \(l2)"
                             focusedField = .newpassword
-                        }else if newpassword.count > 30 {
-                            viewError2 = true
-                            passwordError = "form_password_error_2"
-                            focusedField = .newpassword
-                        }else {
+                        } else {
                             viewError2 = false
                         }
                     }
                 Text(passwordError)
                     .isHidden(!viewError2)
-                    .frame(maxHeight: viewError2 ? 30 : 0)
+                    .frame(maxHeight: viewError2 ? 60 : 0)
                     .foregroundColor(.red)
             }
             Section{
@@ -130,6 +132,8 @@ fileprivate struct PasswordForm: View {
                     func treatError (with error:Error){
                         viewError1 = false
                         viewError2 = false
+                        hasError1 = false
+                        hasError2 = false
                         if AppUtil.isInDebugMode {
                             print(error.localizedDescription)
                         }
@@ -137,13 +141,17 @@ fileprivate struct PasswordForm: View {
                             case UserLoader.UserError.data(let path):
                                 switch path {
                                 case "oldpassword":
-                                    errorMesageString = "form_oldpassword_error"
+                                    let st1 = String(localized: "old_password")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError1 = true
                                     focusedField = .oldpassword
                                     viewError1 = true
                                     viewError2 = false
                                     break
-                                case "password":
-                                    errorMesageString = "form_password_error"
+                                case "newpassword":
+                                    let st1 = String(localized: "new_password")
+                                    errorMesageString = "form_error_2 \(st1)"
+                                    hasError2 = true
                                     focusedField = .newpassword
                                     viewError2 = true
                                     viewError1 = false
@@ -163,6 +171,7 @@ fileprivate struct PasswordForm: View {
                         DispatchQueue.main.async() {
                             popUpObject.title = "popup_error"
                             popUpObject.message = errorMesageString
+                            popUpObject.handler = {rootIsActive = true}
                             popUpObject.show.toggle()
                         }
                     }

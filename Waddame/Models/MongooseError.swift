@@ -15,7 +15,7 @@ struct MongooseError: Codable {
 
 // MARK: - Context
 struct Context: Codable {
-    let value: String
+    let value: String?
     let invalids: [String]?
     let label, key: String
 }
