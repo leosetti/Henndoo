@@ -53,6 +53,7 @@ struct WrapperView: View {
     }
     
     private func handleActive() {
+        logged = nil
         validateUserToken() {
             value in
             
