@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct WrapperView: View {
-    @StateObject var viewRouter: ViewRouter
-    
     @Environment(\.scenePhase) var scenePhase
+
+    @StateObject var viewRouter: ViewRouter
     @StateObject var userLoader = UserLoader()
-    @State private var logged: Bool?
-    
-    @State private var showPopUp: Bool = false
     @StateObject var popUpObject = PopUpObject()
+    
+    @State private var logged: Bool?
+    @State private var showPopUp: Bool = false
     
     var loadinglabel: LocalizedStringKey = "loading"
     
@@ -26,6 +26,8 @@ struct WrapperView: View {
                     switch viewRouter.currentScreen {
                     case .login:
                         LoginView()
+                    case .account:
+                        MainView(selectedTab: "Account")
                     default:
                         MainView()
                     }
@@ -40,16 +42,36 @@ struct WrapperView: View {
                 print("WrapperView loaded")
             }
         }.onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                if AppUtil.isInDebugMode {
-                    print("WrapperView active")
-                }
-                handleActive()
+            switch newPhase {
+                case .active :
+                    if AppUtil.isInDebugMode {
+                        print("WrapperView active")
+                    }
+                    handleActive()
+                break
+                case .background:
+                    if AppUtil.isInDebugMode {
+                        print("App in Back ground")
+                    }
+                    addQuickActions()
+                break
+                default :
+                    break
             }
         }
         .environmentObject(userLoader)
         .environmentObject(viewRouter)
         .environmentObject(popUpObject)
+    }
+    
+    func addQuickActions() {
+        var calluserInfo: [String: NSSecureCoding] {
+            return ["name" : "profile" as NSSecureCoding]
+        }
+        
+        UIApplication.shared.shortcutItems = [
+            UIApplicationShortcutItem(type: "Profile", localizedTitle: "shortcut_my_account", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .contact), userInfo: calluserInfo),
+        ]
     }
     
     private func handleActive() {
@@ -64,7 +86,21 @@ struct WrapperView: View {
                 userLoader.findUser(id: "self") {
                     value in logged = value
                     if(value){
-                        viewRouter.currentScreen = .main
+                        if let name = shortcutItemToProcess?.userInfo?["name"] as? String {
+                            if AppUtil.isInDebugMode {
+                                print("Shortcut name = \(name)")
+                            }
+                            switch name {
+                            case "profile" :
+                                viewRouter.currentScreen = .account
+                                break
+                            default :
+                                viewRouter.currentScreen = .main
+                                break
+                            }
+                        } else{
+                            viewRouter.currentScreen = .main
+                        }
                     }else{
                         viewRouter.currentScreen = .login
                     }
