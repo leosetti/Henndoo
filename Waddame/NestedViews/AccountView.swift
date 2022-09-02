@@ -50,7 +50,9 @@ struct AccountView: View {
             }
             .padding()
             .onAppear(){
-                viewRouter.currentScreen = .main
+                if viewRouter.currentScreen != .account {
+                    viewRouter.currentScreen = .main
+                }
                 userManager.getUser(withID: "self", then: { result in
                     switch result {
                         case .success(let userFromResult):
