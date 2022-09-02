@@ -18,7 +18,7 @@ struct WrapperView: View {
     @StateObject var popUpObject = PopUpObject()
     
     var loadinglabel: LocalizedStringKey = "loading"
-    
+    @State private var shortLivedSession: Bool = false
     var body: some View {
         ZStack{
             Group {
@@ -40,16 +40,38 @@ struct WrapperView: View {
                 print("WrapperView loaded")
             }
         }.onChange(of: scenePhase) { newPhase in
+            if AppUtil.isInDebugMode {
+                print("New phase is \(newPhase)")
+            }
             if newPhase == .active {
                 if AppUtil.isInDebugMode {
                     print("WrapperView active")
                 }
                 handleActive()
+                registerSettingsBundle()
+                updateDisplayFromDefaults()
             }
         }
         .environmentObject(userLoader)
         .environmentObject(viewRouter)
         .environmentObject(popUpObject)
+    }
+    
+    func registerSettingsBundle(){
+       let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+    }
+    
+    func updateDisplayFromDefaults(){
+    //Get the defaults
+        let defaults = UserDefaults.standard
+        let isShortLivedSession = defaults.bool(forKey: "quicklogout_preference")
+        
+        if AppUtil.isInDebugMode {
+            print("Shortlived session = \(isShortLivedSession)")
+        }
+        
+        shortLivedSession = isShortLivedSession
     }
     
     private func handleActive() {
@@ -90,8 +112,13 @@ struct WrapperView: View {
             }
             
             var validInterval:Double = 60 * 30
+            if shortLivedSession {
+                validInterval = 60 * 10
+            }
+            
             if AppUtil.isInDebugMode {
-                validInterval = 60 * 3
+                validInterval = validInterval / 10
+                print("Token valid Interval : \(validInterval)")
             }
             
             let lastValidDate = myDate.addingTimeInterval(validInterval)
