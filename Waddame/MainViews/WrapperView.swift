@@ -16,9 +16,9 @@ struct WrapperView: View {
     
     @State private var logged: Bool?
     @State private var showPopUp: Bool = false
+    @State private var shortLivedSession: Bool = false
     
     var loadinglabel: LocalizedStringKey = "loading"
-    @State private var shortLivedSession: Bool = false
     var body: some View {
         ZStack{
             Group {
