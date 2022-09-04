@@ -22,6 +22,7 @@
 "edit_profile" = "Edit my profile";
 "edit_action" = "Edit";
 "change_action" = "Change";
+"submit" = "Submit";
 
 "my_account" = "My account";
 "home" = "Home";
@@ -29,14 +30,23 @@
 "loading" = "Loading...";
 "account_close" = "Close account";
 "change_password" = "Change password";
+"forgot_password" = "Forgot pasword?";
+"password_reset_title" = "Reset password";
+"password_reset_label" = "Enter the reset token value on this field to reset your password";
+"password_reset_request" = "Request a reset token";
+"password_reset_request_title" = "Request for password reset token";
+"password_reset_request_instruction" = "Enter your email to get the password reset token sent";
+"password_reset_token" = "Reset token";
+"password_reset_token_sent" = "A reset token was sent to the email provided if an associated account is found";
 
-"popup_account_success" = "Success!";
+"popup_success" = "Success";
 "popup_account_password_changed" = "Password changed successfully";
 "popup_account_message" = "Account information updated";
 "popup_account_deleted" = "Your account has been deleted";
 "popup_warning" = "Warning";
 "popup_close_account_message" = "This action will close your account";
 "popup_error" = "Error";
+"popup_error_generic_message" = "An error has occured";
 
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";

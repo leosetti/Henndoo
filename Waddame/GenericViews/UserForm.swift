@@ -338,7 +338,7 @@ struct UserForm: View {
                             case .success :
                                 DispatchQueue.main.async() {
                                     self.didFinishEditing = true
-                                    popUpObject.title = "popup_account_success"
+                                    popUpObject.title = "popup_success"
                                     popUpObject.message = "popup_account_message"
                                     popUpObject.handler = {
                                         viewRouter.currentScreen = .account

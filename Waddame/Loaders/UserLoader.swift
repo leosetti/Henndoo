@@ -18,6 +18,7 @@ class UserLoader: ObservableObject {
     }
     
     typealias Handler = (Result<User, Error>) -> Void
+    typealias CodeDataHandler = (Result<CodeData, Error>) -> Void
     
     @AppStorage("tokenString") private var tokenString = ""
     private let cache = Cache<String, User>()
@@ -425,6 +426,65 @@ class UserLoader: ObservableObject {
                 try self.cache.saveToDisk(withName: "users")
                 handler(.success(userModel))
                 
+            } catch let err as EncodingError {
+                if AppUtil.isInDebugMode {
+                    print("JSON encoding error: \(err.localizedDescription)")
+                }
+                handler(.failure(UserError.encoding))
+                return
+            } catch let jsonError as NSError {
+                if AppUtil.isInDebugMode {
+                    print("JSON decode failed: \(jsonError.localizedDescription)")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+        }
+          
+        task.resume()
+    }
+    
+    
+    func requestUserPasswordToken(withObject object:[String: Any], then handler: @escaping CodeDataHandler) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: object)
+
+        let urlString = configuration.environment.apiURL + "user/send-password-reset-email"
+        if AppUtil.isInDebugMode {
+            print("URLString = \(urlString)")
+        }
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if AppUtil.isInDebugMode {
+                print("-----> data: \(String(describing: data))")
+                print("-----> error: \(String(describing: error))")
+            }
+            
+            if(data != nil){
+                do {
+                    let errorModel = try JSONDecoder().decode(MongooseError.self, from: data!)
+                    let path = errorModel.path[0]
+                    handler(.failure(UserError.data(path)))
+                    return
+                } catch  {}
+            }
+              
+            guard let data = data, error == nil else {
+                if AppUtil.isInDebugMode {
+                    print(error?.localizedDescription ?? "No data")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+
+            do {
+                let codeDataModel = try JSONDecoder().decode(CodeData.self, from: data)
+                handler(.success(codeDataModel))
             } catch let err as EncodingError {
                 if AppUtil.isInDebugMode {
                     print("JSON encoding error: \(err.localizedDescription)")

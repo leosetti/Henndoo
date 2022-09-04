@@ -12,6 +12,7 @@ struct LoginView: View {
     @StateObject private var userObject = UserObject()
     
     var signuplabel: LocalizedStringKey = "signup"
+    var resetlabel: LocalizedStringKey = "forgot_password"
     
     var body: some View {
         NavigationView {
@@ -19,6 +20,7 @@ struct LoginView: View {
                 VStack {
                     LoginText()
                     WelcomeImage()
+                    NavView(content: {ResetPasswordView()}, text: resetlabel)
                     LoginForm()
                     NavView(content: {SignupView()}, text: signuplabel)
                 }.padding()

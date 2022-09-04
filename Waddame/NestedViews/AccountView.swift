@@ -77,7 +77,7 @@ struct AccountView: View {
                     print("Account deleted")
                 }
                 DispatchQueue.main.async() {
-                    popUpObject.title = "popup_account_success"
+                    popUpObject.title = "popup_success"
                     popUpObject.message = "popup_account_deleted"
                     popUpObject.handler = {}
                     popUpObject.show.toggle()
