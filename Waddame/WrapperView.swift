@@ -36,7 +36,7 @@ struct WrapperView: View {
                     Text(loadinglabel)
                 }
             }
-            PopUpWindow(title: popUpObject.title, message: popUpObject.message, buttonText: "OK", handler: popUpObject.handler, show: $popUpObject.show)
+            PopUpWindow(type: popUpObject.type, message: popUpObject.message, buttonText: "OK", handler: popUpObject.handler, show: $popUpObject.show)
         }.onAppear() {
             if AppUtil.isInDebugMode {
                 print("WrapperView loaded")

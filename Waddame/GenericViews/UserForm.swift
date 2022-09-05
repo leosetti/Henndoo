@@ -314,7 +314,7 @@ struct UserForm: View {
                         
                     
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = errorMesageString
                             popUpObject.show.toggle()
                         }
@@ -338,7 +338,7 @@ struct UserForm: View {
                             case .success :
                                 DispatchQueue.main.async() {
                                     self.didFinishEditing = true
-                                    popUpObject.title = "popup_success"
+                                    popUpObject.type = .success
                                     popUpObject.message = "popup_account_message"
                                     popUpObject.handler = {
                                         viewRouter.currentScreen = .account

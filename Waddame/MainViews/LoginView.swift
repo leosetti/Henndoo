@@ -183,7 +183,7 @@ fileprivate struct LoginForm: View {
                         
                     
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = errorMesageString
                             popUpObject.show.toggle()
                         }

@@ -7,15 +7,28 @@
 
 import SwiftUI
 
+enum PopUpWindowType {
+    case success
+    case warning
+    case error
+}
+
 struct PopUpWindow: View {
     typealias Handler = () -> Void
     
-    var title: LocalizedStringKey
+    var type: PopUpWindowType = .error
     var message: LocalizedStringKey
     var buttonText: String
     var handler: Handler
     
     @Binding var show: Bool
+    @State var topImage: Image = Image(systemName: "exclamationmark.circle")
+    @State var topImageColor: Color = Color.red
+    @State var dividerColor: Color = lightRedColor
+    @State var textForegroundColor: Color = Color.red
+    @State var buttonColor: Color = darkRedColor
+    @State var buttonTextColor: Color = Color.white
+    @State var borderColor: Color = Color.red
 
     var body: some View {
         ZStack {
@@ -25,18 +38,22 @@ struct PopUpWindow: View {
 
                 // PopUp Window
                 VStack(alignment: .center, spacing: 0) {
-                    Text(title)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 45, alignment: .center)
-                        .font(Font.system(size: 23, weight: .semibold))
-                        .foregroundColor(Color.white)
-                        .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                    topImage
+                        .resizable()
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .padding()
+                        .foregroundColor(topImageColor)
+                    
+                    Divider()
+                     .frame(height: 1)
+                     .padding(.horizontal, 30)
+                     .background(dividerColor)
 
                     Text(message)
                         .multilineTextAlignment(.center)
                         .font(Font.system(size: 16, weight: .semibold))
                         .padding(EdgeInsets(top: 20, leading: 25, bottom: 20, trailing: 25))
-                        .foregroundColor(Color.white)
+                        .foregroundColor(textForegroundColor)
 
                     Button(action: {
                         // Dismiss the PopUp
@@ -48,14 +65,42 @@ struct PopUpWindow: View {
                         Text(buttonText)
                             .frame(maxWidth: .infinity)
                             .frame(height: 54, alignment: .center)
-                            .foregroundColor(Color.white)
-                            .background(Color(#colorLiteral(red: 0.6196078431, green: 0.1098039216, blue: 0.2509803922, alpha: 1)))
+                            .foregroundColor(buttonTextColor)
+                            .background(buttonColor)
                             .font(Font.system(size: 23, weight: .semibold))
                     }).buttonStyle(PlainButtonStyle())
                 }
                 .frame(maxWidth: 300)
-                .border(Color.white, width: 2)
-                .background(Color(#colorLiteral(red: 0.737254902, green: 0.1294117647, blue: 0.2941176471, alpha: 1)))
+                .border(borderColor, width: 2)
+                .background(lightGreyColor)
+            }
+        }
+        .onAppear() {
+            switch type {
+            case .success:
+                topImage = Image(systemName: "checkmark.circle")
+                topImageColor = Color.green
+                dividerColor = lightGreenColor
+                textForegroundColor = Color.green
+                buttonColor = darkGreenColor
+                buttonTextColor = Color.white
+                borderColor = Color.green
+            case .warning:
+                topImage = Image(systemName: "info.circle")
+                topImageColor = Color.yellow
+                dividerColor = lightYellowColor
+                textForegroundColor = Color.gray
+                buttonColor = darkYellowColor
+                buttonTextColor = Color.gray
+                borderColor = Color.yellow
+            case .error:
+                topImage = Image(systemName: "exclamationmark.circle")
+                topImageColor = Color.red
+                dividerColor = lightRedColor
+                textForegroundColor = Color.red
+                buttonColor = darkRedColor
+                buttonTextColor = Color.white
+                borderColor = Color.red
             }
         }
     }
@@ -63,6 +108,6 @@ struct PopUpWindow: View {
 
 struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
-        PopUpWindow(title: "Error", message: "Sorry, that email address is already used!", buttonText: "OK", handler: {}, show: .constant(true))
+        PopUpWindow(type: .error, message: "Sorry, that email address is already used!", buttonText: "OK", handler: {}, show: .constant(true))
     }
 }

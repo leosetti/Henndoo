@@ -40,11 +40,9 @@
 "password_reset_token_sent" = "A reset token was sent to the email provided if an associated account is found";
 "password_reset_newpassword" = "Enter your new password";
 
-"popup_success" = "Success";
 "popup_account_password_changed" = "Password changed successfully";
 "popup_account_message" = "Account information updated";
 "popup_account_deleted" = "Your account has been deleted";
-"popup_warning" = "Warning";
 "popup_close_account_message" = "This action will close your account";
 "popup_error" = "Error";
 "popup_error_generic_message" = "An error has occured";

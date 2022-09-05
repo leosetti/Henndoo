@@ -68,7 +68,7 @@ fileprivate struct ResetForm: View {
                             let res = try result.get()
                             if res.code == "OK" {
                                 DispatchQueue.main.async() {
-                                    popUpObject.title = "popup_success"
+                                    popUpObject.type = .success
                                     popUpObject.message = "password_reset_token_sent"
                                     popUpObject.show.toggle()
                                     popUpObject.handler = {
@@ -79,7 +79,7 @@ fileprivate struct ResetForm: View {
                             }
                         } catch  {
                             DispatchQueue.main.async() {
-                                popUpObject.title = "popup_error"
+                                popUpObject.type = .error
                                 popUpObject.message = "popup_error_generic_message"
                                 popUpObject.show.toggle()
                             }
@@ -88,7 +88,7 @@ fileprivate struct ResetForm: View {
                     break
                     case .failure(_) :
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = "popup_error_generic_message"
                             popUpObject.show.toggle()
                         }

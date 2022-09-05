@@ -76,7 +76,7 @@ fileprivate struct ResetForm: View {
                 switch result {
                 case .success :
                     DispatchQueue.main.async() {
-                        popUpObject.title = "popup_success"
+                        popUpObject.type = .success
                         popUpObject.message = "popup_account_password_changed"
                         popUpObject.handler = {
                             viewRouter.currentScreen = .account
@@ -86,7 +86,7 @@ fileprivate struct ResetForm: View {
                     break
                 case .failure(_) :
                     DispatchQueue.main.async() {
-                        popUpObject.title = "popup_error"
+                        popUpObject.type = .error
                         popUpObject.message = "popup_error_generic_message"
                         popUpObject.show.toggle()
                     }

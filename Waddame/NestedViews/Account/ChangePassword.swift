@@ -161,7 +161,7 @@ fileprivate struct PasswordForm: View {
                         
                     
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = errorMesageString
                             popUpObject.handler = {}
                             popUpObject.show.toggle()
@@ -177,7 +177,7 @@ fileprivate struct PasswordForm: View {
                             hasError2 = false
                             errorMesageString = "popup_error"
                             DispatchQueue.main.async() {
-                                popUpObject.title = "popup_success"
+                                popUpObject.type = .success
                                 popUpObject.message = "popup_account_password_changed"
                                 popUpObject.handler = {
                                     viewRouter.currentScreen = .account

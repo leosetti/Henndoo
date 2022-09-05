@@ -38,7 +38,7 @@ struct AccountView: View {
                     LogoutButtonContent()
                 }
                 Button(action: {
-                    popUpObject.title = "popup_warning"
+                    popUpObject.type = .warning
                     popUpObject.message = "popup_close_account_message"
                     popUpObject.show.toggle()
                     popUpObject.handler = {
@@ -79,7 +79,7 @@ struct AccountView: View {
                     print("Account deleted")
                 }
                 DispatchQueue.main.async() {
-                    popUpObject.title = "popup_success"
+                    popUpObject.type = .success
                     popUpObject.message = "popup_account_deleted"
                     popUpObject.handler = {}
                     popUpObject.show.toggle()

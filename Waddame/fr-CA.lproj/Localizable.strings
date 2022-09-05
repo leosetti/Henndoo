@@ -40,11 +40,9 @@
 "password_reset_token_sent" = "Un jeton de réinitialisation a été envoyé à l'adresse fournie, si celle-ci a un compte associé";
 "password_reset_newpassword" = "Entrez votre nouveau mot de passe";
 
-"popup_success" = "Succès";
 "popup_account_password_changed" = "Mot de passe changé avec succès";
 "popup_account_message" = "Informations de compte mises à jour";
 "popup_account_deleted" = "Votre compte a été supprimé";
-"popup_warning" = "Avertissement";
 "popup_close_account_message" = "Cette action fermera votre compte";
 "popup_error" = "Erreur";
 "popup_error_generic_message" = "Une erreur est survenue";
