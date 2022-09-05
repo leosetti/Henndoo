@@ -53,7 +53,7 @@ fileprivate struct WelcomeImage: View {
             .frame(width: 150, height: 150)
             .clipped()
             .cornerRadius(150)
-            .padding(.bottom, 50)
+            .padding(.bottom, 20)
     }
 }
 

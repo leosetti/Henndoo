@@ -38,6 +38,7 @@
 "password_reset_request_instruction" = "Entrez votre courriel pour avoir le jeton de réinitialisation de mot de passe envoyé";
 "password_reset_token" = "Jeton de réinitialisation";
 "password_reset_token_sent" = "Un jeton de réinitialisation a été envoyé à l'adresse fournie, si celle-ci a un compte associé";
+"password_reset_newpassword" = "Entrez votre nouveau mot de passe";
 
 "popup_success" = "Succès";
 "popup_account_password_changed" = "Mot de passe changé avec succès";

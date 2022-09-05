@@ -502,4 +502,81 @@ class UserLoader: ObservableObject {
           
         task.resume()
     }
+    
+    func resetUserPassword(withObject object:[String: Any], then handler: @escaping Handler) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: object)
+        if AppUtil.isInDebugMode {
+            print("-----> jsonData: \(String(describing: jsonData))")
+        }
+        
+        let urlString = configuration.environment.apiURL + "user/reset-password"
+        if AppUtil.isInDebugMode {
+            print("URLString = \(urlString)")
+        }
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("\(String(describing: jsonData?.count))", forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if AppUtil.isInDebugMode {
+                print("-----> data: \(String(describing: data))")
+                print("-----> error: \(String(describing: error))")
+            }
+            
+            if(data != nil){
+                do {
+                    let errorModel = try JSONDecoder().decode(MongooseError.self, from: data!)
+                    let path = errorModel.path[0]
+                    handler(.failure(UserError.data(path)))
+                    return
+                } catch  {}
+            }
+            
+            if let httpUrlResponse = response as? HTTPURLResponse
+            {
+                if let bearer:String = httpUrlResponse.allHeaderFields["Authorization"] as? String{
+                    let bearerComponents = bearer.components(separatedBy: " ")
+                    if (bearerComponents.count > 1){
+                        let token = bearerComponents[1]
+                        DispatchQueue.main.async() {
+                            self.tokenString = token
+                        }
+                    }
+                }
+            }
+              
+            guard let data = data, error == nil else {
+                if AppUtil.isInDebugMode {
+                    print(error?.localizedDescription ?? "No data")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+            
+            do {
+                let userModel = try JSONDecoder().decode(User.self, from: data)
+                self.cache["self"] = userModel
+                try self.cache.saveToDisk(withName: "users")
+                handler(.success(userModel))
+                
+            } catch let err as EncodingError {
+                if AppUtil.isInDebugMode {
+                    print("JSON encoding error: \(err.localizedDescription)")
+                }
+                handler(.failure(UserError.encoding))
+                return
+            } catch let jsonError as NSError {
+                if AppUtil.isInDebugMode {
+                    print("JSON decode failed: \(jsonError.localizedDescription)")
+                }
+                handler(.failure(UserError.fetching))
+                return
+            }
+        }
+          
+        task.resume()
+    }
 }

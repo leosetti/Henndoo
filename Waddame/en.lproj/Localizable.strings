@@ -38,6 +38,7 @@
 "password_reset_request_instruction" = "Enter your email to get the password reset token sent";
 "password_reset_token" = "Reset token";
 "password_reset_token_sent" = "A reset token was sent to the email provided if an associated account is found";
+"password_reset_newpassword" = "Enter your new password";
 
 "popup_success" = "Success";
 "popup_account_password_changed" = "Password changed successfully";
