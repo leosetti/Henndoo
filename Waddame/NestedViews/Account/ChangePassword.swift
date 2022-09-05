@@ -191,26 +191,11 @@ fileprivate struct PasswordForm: View {
                     })
                     
                 }) {
-                    ButtonContent()
+                    GenericButtonView(label: "change_action")
                 }
             }
         }.onAppear() {
             focusedField = .oldpassword
         }
-    }
-}
-
-fileprivate struct ButtonContent: View {
-    var loginlabel: LocalizedStringKey = "change_action"
-    
-    var body: some View {
-        Text(loginlabel)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }

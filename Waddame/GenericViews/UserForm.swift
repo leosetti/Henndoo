@@ -362,9 +362,9 @@ struct UserForm: View {
                 }) {
                 switch type {
                     case .signup:
-                        SignupButtonContent()
+                        GenericButtonView(label: "signup_action")
                     case .edit:
-                        EditButtonContent()
+                        GenericButtonView(label: "edit_action")
                     }
                 }
             }.onAppear() {
@@ -378,39 +378,6 @@ struct UserForm: View {
                 }
             })
         }
-    
-        
     }
 }
 
-
- 
-fileprivate struct SignupButtonContent: View {
-    var label: LocalizedStringKey = "signup_action"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
-    }
-}
-
-fileprivate struct EditButtonContent: View {
-    var label: LocalizedStringKey = "edit_action"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
-    }
-}

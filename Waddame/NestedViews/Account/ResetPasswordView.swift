@@ -93,22 +93,8 @@ fileprivate struct ResetForm: View {
                 }
             })
         }) {
-            ButtonContent().padding(.top, 20)
+            GenericButtonView(label: "submit")
+                .padding(.top, 20)
         }
-    }
-}
-
-fileprivate struct ButtonContent: View {
-    var label: LocalizedStringKey = "submit"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }

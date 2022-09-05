@@ -202,26 +202,11 @@ fileprivate struct LoginForm: View {
                     })
                     
                 }) {
-                    LoginButtonContent()
+                    GenericButtonView(label: "login_action")
                 }
             }
         }.onAppear() {
             focusedField = .login
         }
-    }
-}
-
-fileprivate struct LoginButtonContent: View {
-    var loginlabel: LocalizedStringKey = "login_action"
-    
-    var body: some View {
-        Text(loginlabel)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }

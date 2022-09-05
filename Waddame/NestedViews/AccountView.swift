@@ -26,7 +26,7 @@ struct AccountView: View {
                     
                     if viewRouter.currentScreen != .account {
                         NavigationLink(destination: EditProfileView(), isActive: self.$isNavLinkActive) {
-                            EditButtonView()
+                            GenericButtonView(label: "edit_profile")
                         }
                     }
                     
@@ -35,7 +35,7 @@ struct AccountView: View {
                     userManager.logoutUser()
                     viewRouter.currentScreen = .login
                 }) {
-                    LogoutButtonContent()
+                    GenericButtonView(label: "logout_action")
                 }
                 Button(action: {
                     popUpObject.type = .warning
@@ -122,36 +122,6 @@ fileprivate struct AccountText: View {
         Text(user.email)
             .font(.body)
             .padding(.bottom, 20)
-    }
-}
-
-fileprivate struct EditButtonView: View {
-    var label: LocalizedStringKey = "edit_profile"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
-    }
-}
-
-fileprivate struct LogoutButtonContent: View {
-    var label: LocalizedStringKey = "logout_action"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }
 
