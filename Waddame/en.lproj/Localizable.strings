@@ -23,6 +23,7 @@
 "edit_action" = "Edit";
 "change_action" = "Change";
 "submit" = "Submit";
+"cancel" = "Cancel";
 
 "my_account" = "My account";
 "home" = "Home";
@@ -44,6 +45,7 @@
 "popup_account_message" = "Account information updated";
 "popup_account_deleted" = "Your account has been deleted";
 "popup_close_account_message" = "This action will close your account";
+"popup_logout_message" = "You are about to log out from the account";
 "popup_error" = "Error";
 "popup_error_generic_message" = "An error has occured";
 

@@ -23,6 +23,7 @@
 "edit_action" = "Éditer";
 "change_action" = "Changer";
 "submit" = "Soumettre";
+"cancel" = "Annuler";
 
 "my_account" = "Mon compte";
 "home" = "Accueil";
@@ -44,6 +45,7 @@
 "popup_account_message" = "Informations de compte mises à jour";
 "popup_account_deleted" = "Votre compte a été supprimé";
 "popup_close_account_message" = "Cette action fermera votre compte";
+"popup_logout_message" = "Vous êtes sur le point de vous déconnecter";
 "popup_error" = "Erreur";
 "popup_error_generic_message" = "Une erreur est survenue";
 

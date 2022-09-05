@@ -32,8 +32,13 @@ struct AccountView: View {
                     
                 }
                 Button(action: {
-                    userManager.logoutUser()
-                    viewRouter.currentScreen = .login
+                    popUpObject.type = .warning
+                    popUpObject.message = "popup_logout_message"
+                    popUpObject.show.toggle()
+                    popUpObject.handler = {
+                        userManager.logoutUser()
+                        viewRouter.currentScreen = .login
+                    }
                 }) {
                     GenericButtonView(label: "logout_action")
                 }

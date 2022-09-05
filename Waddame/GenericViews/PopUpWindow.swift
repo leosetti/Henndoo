@@ -19,6 +19,7 @@ struct PopUpWindow: View {
     var type: PopUpWindowType = .error
     var message: LocalizedStringKey
     var buttonText: String
+    let cancelButtonText: LocalizedStringKey = "cancel"
     var handler: Handler
     
     @Binding var show: Bool
@@ -27,7 +28,9 @@ struct PopUpWindow: View {
     @State var dividerColor: Color = lightRedColor
     @State var textForegroundColor: Color = Color.red
     @State var buttonColor: Color = darkRedColor
+    @State var cancelButtonColor: Color = darkRedColor
     @State var buttonTextColor: Color = Color.white
+    @State var cancelButtonTextColor: Color = Color.white
     @State var borderColor: Color = Color.red
 
     var body: some View {
@@ -69,45 +72,62 @@ struct PopUpWindow: View {
                             .background(buttonColor)
                             .font(Font.system(size: 23, weight: .semibold))
                     }).buttonStyle(PlainButtonStyle())
+                    
+                    if type == .warning {
+                        Button(action: {
+                            // Dismiss the PopUp
+                            withAnimation(.linear(duration: 0.3)) {
+                                show = false
+                            }
+                        }, label: {
+                            Text(cancelButtonText)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 54, alignment: .center)
+                                .foregroundColor(cancelButtonTextColor)
+                                .background(cancelButtonColor)
+                                .font(Font.system(size: 23, weight: .semibold))
+                        }).buttonStyle(PlainButtonStyle())
+                    }
                 }
                 .frame(maxWidth: 300)
                 .border(borderColor, width: 2)
                 .background(lightGreyColor)
+                .onAppear() {
+                    switch type {
+                    case .success:
+                        topImage = Image(systemName: "checkmark.circle")
+                        topImageColor = Color.green
+                        dividerColor = lightGreenColor
+                        textForegroundColor = Color.green
+                        buttonColor = darkGreenColor
+                        buttonTextColor = Color.white
+                        borderColor = Color.green
+                    case .warning:
+                        topImage = Image(systemName: "info.circle")
+                        topImageColor = Color.yellow
+                        dividerColor = lightYellowColor
+                        textForegroundColor = Color.gray
+                        buttonColor = darkYellowColor
+                        buttonTextColor = Color.gray
+                        borderColor = Color.yellow
+                    case .error:
+                        topImage = Image(systemName: "exclamationmark.circle")
+                        topImageColor = Color.red
+                        dividerColor = lightRedColor
+                        textForegroundColor = Color.red
+                        buttonColor = darkRedColor
+                        buttonTextColor = Color.white
+                        borderColor = Color.red
+                    }
+                }
             }
         }
-        .onAppear() {
-            switch type {
-            case .success:
-                topImage = Image(systemName: "checkmark.circle")
-                topImageColor = Color.green
-                dividerColor = lightGreenColor
-                textForegroundColor = Color.green
-                buttonColor = darkGreenColor
-                buttonTextColor = Color.white
-                borderColor = Color.green
-            case .warning:
-                topImage = Image(systemName: "info.circle")
-                topImageColor = Color.yellow
-                dividerColor = lightYellowColor
-                textForegroundColor = Color.gray
-                buttonColor = darkYellowColor
-                buttonTextColor = Color.gray
-                borderColor = Color.yellow
-            case .error:
-                topImage = Image(systemName: "exclamationmark.circle")
-                topImageColor = Color.red
-                dividerColor = lightRedColor
-                textForegroundColor = Color.red
-                buttonColor = darkRedColor
-                buttonTextColor = Color.white
-                borderColor = Color.red
-            }
-        }
+       
     }
 }
 
 struct PopUpWindow_Previews: PreviewProvider {
     static var previews: some View {
-        PopUpWindow(type: .error, message: "Sorry, that email address is already used!", buttonText: "OK", handler: {}, show: .constant(true))
+        PopUpWindow(type: .warning, message: "Sorry, that email address is already used!", buttonText: "OK", handler: {}, show: .constant(true))
     }
 }
