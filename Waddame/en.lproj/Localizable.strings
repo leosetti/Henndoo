@@ -35,7 +35,7 @@
 "password_reset_label" = "Enter the reset token value on this field to reset your password";
 "password_reset_request" = "Request a reset token";
 "password_reset_request_title" = "Request for password reset token";
-"password_reset_request_instruction" = "Enter your email to get the password reset token sent";
+"password_reset_request_instruction" = "Enter your login to get the password reset token sent to the corresponding account email";
 "password_reset_token" = "Reset token";
 "password_reset_token_sent" = "A reset token was sent to the email provided if an associated account is found";
 "password_reset_newpassword" = "Enter your new password";

@@ -35,7 +35,7 @@
 "password_reset_label" = "Entrez le jeton de réinitialisation dans ce champ pour réinitialiser votre mot de passe";
 "password_reset_request" = "Demander un jeton de réinitialisation";
 "password_reset_request_title" = "Demande pour jeton de réinitialisation de mot de passe";
-"password_reset_request_instruction" = "Entrez votre courriel pour avoir le jeton de réinitialisation de mot de passe envoyé";
+"password_reset_request_instruction" = "Entrez votre courriel ou nom d'usager pour avoir le jeton de réinitialisation de mot de passe envoyé au courriel du compte";
 "password_reset_token" = "Jeton de réinitialisation";
 "password_reset_token_sent" = "Un jeton de réinitialisation a été envoyé à l'adresse fournie, si celle-ci a un compte associé";
 "password_reset_newpassword" = "Entrez votre nouveau mot de passe";

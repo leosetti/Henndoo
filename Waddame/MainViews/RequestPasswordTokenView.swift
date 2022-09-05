@@ -42,18 +42,18 @@ fileprivate struct ResetForm: View {
     @EnvironmentObject var popUpObject: PopUpObject
     @EnvironmentObject var userManager: UserLoader
     
-    @State var email: String = ""
+    @State var login: String = ""
     
-    var title: LocalizedStringKey = "email"
+    var title: LocalizedStringKey = "login"
     
     var body: some View {
-        TextField(title, text: $email)
+        TextField(title, text: $login)
             .padding()
             .background(lightGreyColor)
             .cornerRadius(5.0)
         Button(action: {
             var body: [String: Any] = [:]
-            body["login"] = email
+            body["login"] = login
             body["language"] = Locale.current.languageCode
             
             func requestToken(withBody body:[String: Any] ) {
@@ -97,7 +97,7 @@ fileprivate struct ResetForm: View {
             }
             requestToken(withBody: body)
         }) {
-            ButtonContent()
+            ButtonContent().padding(.top, 20)
         }
     }
 }
