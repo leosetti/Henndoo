@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ResetPasswordView: View {
     var label: LocalizedStringKey = "password_reset_request"
+    @State var isActive: Bool = false
     
     var body: some View {
         VStack{
             ResetText()
-            NavView(content: {RequestPasswordTokenView()}, text: label).padding(.bottom, 20)
+            NavView(content: {RequestPasswordTokenView()}, text: label, isActive: isActive).padding(.bottom, 20)
             ResetForm()
         }.padding()
     }

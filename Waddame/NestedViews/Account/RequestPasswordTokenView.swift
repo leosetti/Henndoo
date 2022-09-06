@@ -39,6 +39,7 @@ fileprivate struct ResetText: View {
 }
 
 fileprivate struct ResetForm: View {
+    @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var popUpObject: PopUpObject
     @EnvironmentObject var userManager: UserLoader
     
@@ -72,9 +73,8 @@ fileprivate struct ResetForm: View {
                                     popUpObject.message = "password_reset_token_sent"
                                     popUpObject.show.toggle()
                                     popUpObject.handler = {
-                                        
+                                        viewRouter.currentScreen = .resetPassword
                                     }
-                                    
                                 }
                             }
                         } catch  {

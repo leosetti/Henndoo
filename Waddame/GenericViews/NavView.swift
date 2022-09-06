@@ -10,9 +10,10 @@ import SwiftUI
 struct NavView<Content: View>: View {
     var content: () -> Content
     var text: LocalizedStringKey
+    @State var isActive: Bool = false
     
     var body: some View{
-        NavigationLink(destination: content()) {
+        NavigationLink(destination: content(), isActive: $isActive) {
             Text(text)
                 .foregroundColor(.blue)
         }

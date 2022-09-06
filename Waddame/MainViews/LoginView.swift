@@ -20,7 +20,11 @@ struct LoginView: View {
                 VStack {
                     LoginText()
                     WelcomeImage()
-                    NavView(content: {ResetPasswordView()}, text: resetlabel)
+                    if viewRouter.currentScreen == .resetPassword {
+                        NavView(content: {ResetPasswordView(isActive: false)}, text: resetlabel, isActive: true)
+                    }else{
+                        NavView(content: {ResetPasswordView()}, text: resetlabel)
+                    }
                     LoginForm()
                     NavView(content: {SignupView()}, text: signuplabel)
                 }.padding()

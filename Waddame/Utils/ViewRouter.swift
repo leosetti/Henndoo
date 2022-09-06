@@ -12,6 +12,7 @@ enum Screen {
     case login
     case main
     case account
+    case resetPassword
 }
 
 class ViewRouter: ObservableObject {

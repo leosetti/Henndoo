@@ -26,6 +26,8 @@ struct WrapperView: View {
                     switch viewRouter.currentScreen {
                     case .login:
                         LoginView()
+                    case .resetPassword:
+                        LoginView()
                     case .account:
                         MainView(selectedTab: "Account")
                     default:
