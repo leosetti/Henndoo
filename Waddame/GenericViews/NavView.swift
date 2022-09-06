@@ -7,15 +7,25 @@
 
 import SwiftUI
 
+enum NavViewType {
+    case link
+    case button
+}
+
 struct NavView<Content: View>: View {
     var content: () -> Content
     var text: LocalizedStringKey
+    var type: NavViewType = .link
     @State var isActive: Bool = false
     
     var body: some View{
         NavigationLink(destination: content(), isActive: $isActive) {
-            Text(text)
-                .foregroundColor(.blue)
+            if type == .button {
+                GenericButtonView(label: text)
+            }else {
+                Text(text)
+                    .foregroundColor(.blue)
+            }
         }
     }
 }

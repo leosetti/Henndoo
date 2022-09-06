@@ -20,16 +20,12 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
                     
                     if viewRouter.currentScreen != .account {
-                        NavigationLink(destination: EditProfileView(), isActive: self.$isNavLinkActive) {
-                            GenericButtonView(label: "edit_profile")
-                        }
+                        NavView(content: {EditProfileView()}, text: editlabel, type: .button, isActive: self.isNavLinkActive)
                     }
-                    
                 }
                 Button(action: {
                     popUpObject.type = .warning
