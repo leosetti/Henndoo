@@ -42,6 +42,8 @@
 "password_reset_token_sent" = "Un jeton de réinitialisation a été envoyé à l'adresse fournie, si celle-ci a un compte associé";
 "password_reset_newpassword" = "Entrez votre nouveau mot de passe";
 
+"open_settings" = "Ouvrir les réglages pour cette application";
+
 "popup_account_password_changed" = "Mot de passe changé avec succès";
 "popup_account_message" = "Informations de compte mises à jour";
 "popup_account_deleted" = "Votre compte a été supprimé";

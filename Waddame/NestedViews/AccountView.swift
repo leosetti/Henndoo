@@ -23,30 +23,37 @@ struct AccountView: View {
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
                     
+                    Button(action: {
+                        openSettings()
+                    }) {
+                        InfoLinkContent()
+                    }
+                    
                     if viewRouter.currentScreen != .account {
                         NavView(content: {EditProfileView()}, text: editlabel, type: .button, isActive: self.isNavLinkActive)
                     }
-                }
-                Button(action: {
-                    popUpObject.type = .warning
-                    popUpObject.message = "popup_logout_message"
-                    popUpObject.show.toggle()
-                    popUpObject.handler = {
-                        userManager.logoutUser()
-                        viewRouter.currentScreen = .login
+                
+                    Button(action: {
+                        popUpObject.type = .warning
+                        popUpObject.message = "popup_logout_message"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                            userManager.logoutUser()
+                            viewRouter.currentScreen = .login
+                        }
+                    }) {
+                        GenericButtonView(label: "logout_action")
                     }
-                }) {
-                    GenericButtonView(label: "logout_action")
-                }
-                Button(action: {
-                    popUpObject.type = .warning
-                    popUpObject.message = "popup_close_account_message"
-                    popUpObject.show.toggle()
-                    popUpObject.handler = {
-                        deleteAccount()
+                    Button(action: {
+                        popUpObject.type = .warning
+                        popUpObject.message = "popup_close_account_message"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                            deleteAccount()
+                        }
+                    }) {
+                        CloseAccountContent()
                     }
-                }) {
-                    CloseAccountContent()
                 }
             }
             .padding()
@@ -66,6 +73,10 @@ struct AccountView: View {
                 })
             }
         }.environmentObject(userObject)
+    }
+    
+    private func openSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
     
     private func deleteAccount() {
@@ -102,6 +113,15 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         AccountView().environmentObject(UserLoader())
+    }
+}
+
+fileprivate struct InfoLinkContent: View {
+    var label: LocalizedStringKey = "open_settings"
+    
+    var body: some View {
+        Text(label)
+            .padding()
     }
 }
 
