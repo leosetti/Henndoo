@@ -9,15 +9,29 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var popUpObject: PopUpObject
     @StateObject private var userObject = UserObject()
     
     var signuplabel: LocalizedStringKey = "signup"
     var resetlabel: LocalizedStringKey = "forgot_password"
     
     var body: some View {
+        var configuration = Configuration()
+        var envName:String = ""
+        
         NavigationView {
             ScrollView{
                 VStack {
+                    Button(action: {
+                        envName = configuration.environment.name
+                        popUpObject.type = .info
+                        popUpObject.message = "popup_about_message \(Bundle.main.releaseVersionAndBuildNumberPretty) \(envName)"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                        }
+                    }) {
+                        InfoLinkContent()
+                    }
                     LoginText()
                     WelcomeImage()
                     if viewRouter.currentScreen == .resetPassword {
@@ -36,6 +50,16 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+    }
+}
+
+fileprivate struct InfoLinkContent: View {
+    var label: LocalizedStringKey = "about"
+    
+    var body: some View {
+        Text(label)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding()
     }
 }
 

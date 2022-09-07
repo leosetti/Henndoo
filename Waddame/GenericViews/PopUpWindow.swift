@@ -10,6 +10,7 @@ import SwiftUI
 enum PopUpWindowType {
     case success
     case warning
+    case info
     case error
 }
 
@@ -102,8 +103,16 @@ struct PopUpWindow: View {
                         buttonColor = darkGreenColor
                         buttonTextColor = Color.white
                         borderColor = Color.green
-                    case .warning:
+                    case .info:
                         topImage = Image(systemName: "info.circle")
+                        topImageColor = Color.blue
+                        dividerColor = lightBlueColor
+                        textForegroundColor = Color.blue
+                        buttonColor = darkBlueColor
+                        buttonTextColor = Color.white
+                        borderColor = Color.blue
+                    case .warning:
+                        topImage = Image(systemName: "exclamationmark.triangle")
                         topImageColor = Color.yellow
                         dividerColor = lightYellowColor
                         textForegroundColor = Color.gray

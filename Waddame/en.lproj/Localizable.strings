@@ -24,6 +24,7 @@
 "change_action" = "Change";
 "submit" = "Submit";
 "cancel" = "Cancel";
+"about" = "About";
 
 "my_account" = "My account";
 "home" = "Home";
@@ -48,6 +49,7 @@
 "popup_logout_message" = "You are about to log out from the account";
 "popup_error" = "Error";
 "popup_error_generic_message" = "An error has occured";
+"popup_about_message %@ %@" = "About this application\n\nVersion %@ - %@";
 
 "createUserError" = "Error creating account";
 "loginError" = "Error logging in";

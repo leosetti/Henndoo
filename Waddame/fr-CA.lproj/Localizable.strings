@@ -24,6 +24,7 @@
 "change_action" = "Changer";
 "submit" = "Soumettre";
 "cancel" = "Annuler";
+"about" = "À propos";
 
 "my_account" = "Mon compte";
 "home" = "Accueil";
@@ -48,6 +49,7 @@
 "popup_logout_message" = "Vous êtes sur le point de vous déconnecter";
 "popup_error" = "Erreur";
 "popup_error_generic_message" = "Une erreur est survenue";
+"popup_about_message %@ %@" = "À propos de cette appplication\n\nVersion %@ - %@";
 
 "createUserError" = "Erreur de création de compte";
 "loginError" = "Erreur de connexion";
