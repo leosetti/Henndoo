@@ -161,7 +161,7 @@ fileprivate struct PasswordForm: View {
                         
                     
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = errorMesageString
                             popUpObject.handler = {}
                             popUpObject.show.toggle()
@@ -177,7 +177,7 @@ fileprivate struct PasswordForm: View {
                             hasError2 = false
                             errorMesageString = "popup_error"
                             DispatchQueue.main.async() {
-                                popUpObject.title = "popup_account_success"
+                                popUpObject.type = .success
                                 popUpObject.message = "popup_account_password_changed"
                                 popUpObject.handler = {
                                     viewRouter.currentScreen = .account
@@ -191,26 +191,11 @@ fileprivate struct PasswordForm: View {
                     })
                     
                 }) {
-                    ButtonContent()
+                    GenericButtonView(label: "change_action")
                 }
             }
         }.onAppear() {
             focusedField = .oldpassword
         }
-    }
-}
-
-fileprivate struct ButtonContent: View {
-    var loginlabel: LocalizedStringKey = "change_action"
-    
-    var body: some View {
-        Text(loginlabel)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }

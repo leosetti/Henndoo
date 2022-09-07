@@ -16,7 +16,7 @@ class PopUpObject: ObservableObject {
     typealias Handler = () -> Void
     
     @Published var show: Bool = false
-    @Published var title: LocalizedStringKey = ""
+    @Published var type: PopUpWindowType = .error
     @Published var message: LocalizedStringKey = ""
     @Published var handler: Handler = {}
 

@@ -9,16 +9,36 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var popUpObject: PopUpObject
     @StateObject private var userObject = UserObject()
     
     var signuplabel: LocalizedStringKey = "signup"
+    var resetlabel: LocalizedStringKey = "forgot_password"
     
     var body: some View {
+        var configuration = Configuration()
+        var envName:String = ""
+        
         NavigationView {
             ScrollView{
                 VStack {
+                    Button(action: {
+                        envName = configuration.environment.name
+                        popUpObject.type = .info
+                        popUpObject.message = "popup_about_message \(Bundle.main.releaseVersionAndBuildNumberPretty) \(envName)"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                        }
+                    }) {
+                        InfoLinkContent()
+                    }
                     LoginText()
                     WelcomeImage()
+                    if viewRouter.currentScreen == .resetPassword {
+                        NavView(content: {ResetPasswordView(isActive: false)}, text: resetlabel, isActive: true)
+                    }else{
+                        NavView(content: {ResetPasswordView()}, text: resetlabel)
+                    }
                     LoginForm()
                     NavView(content: {SignupView()}, text: signuplabel)
                 }.padding()
@@ -30,6 +50,16 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+    }
+}
+
+fileprivate struct InfoLinkContent: View {
+    var label: LocalizedStringKey = "about"
+    
+    var body: some View {
+        Text(label)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding()
     }
 }
 
@@ -51,7 +81,7 @@ fileprivate struct WelcomeImage: View {
             .frame(width: 150, height: 150)
             .clipped()
             .cornerRadius(150)
-            .padding(.bottom, 50)
+            .padding(.bottom, 20)
     }
 }
 
@@ -181,7 +211,7 @@ fileprivate struct LoginForm: View {
                         
                     
                         DispatchQueue.main.async() {
-                            popUpObject.title = "popup_error"
+                            popUpObject.type = .error
                             popUpObject.message = errorMesageString
                             popUpObject.show.toggle()
                         }
@@ -200,26 +230,11 @@ fileprivate struct LoginForm: View {
                     })
                     
                 }) {
-                    LoginButtonContent()
+                    GenericButtonView(label: "login_action")
                 }
             }
         }.onAppear() {
             focusedField = .login
         }
-    }
-}
-
-fileprivate struct LoginButtonContent: View {
-    var loginlabel: LocalizedStringKey = "login_action"
-    
-    var body: some View {
-        Text(loginlabel)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }

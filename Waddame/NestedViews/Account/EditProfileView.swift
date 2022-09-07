@@ -13,14 +13,8 @@ struct EditProfileView: View {
     
     var body: some View {
         List{
-            NavigationLink(destination: ChangePassword()) {
-                Text(changepwdlabel)
-                    .foregroundColor(.blue)
-            }
-            NavigationLink(destination: EditView()) {
-                Text(editlabel)
-                    .foregroundColor(.blue)
-            }
+            NavView(content: {ChangePassword()}, text: changepwdlabel)
+            NavView(content: {EditView()}, text: editlabel)
         }
     }
 }

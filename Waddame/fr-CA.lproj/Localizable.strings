@@ -22,6 +22,9 @@
 "edit_profile" = "Éditer mon profil";
 "edit_action" = "Éditer";
 "change_action" = "Changer";
+"submit" = "Soumettre";
+"cancel" = "Annuler";
+"about" = "À propos";
 
 "my_account" = "Mon compte";
 "home" = "Accueil";
@@ -29,14 +32,26 @@
 "loading" = "En chargement...";
 "account_close" = "Fermer le compte";
 "change_password" = "Changer le mot de passe";
+"forgot_password" = "Mot de passe oublié ?";
+"password_reset" = "Réinitialisation de mot de passe";
+"password_reset_label" = "Entrez le jeton de réinitialisation dans ce champ pour réinitialiser votre mot de passe";
+"password_reset_request" = "Demander un jeton de réinitialisation";
+"password_reset_request_title" = "Demande pour jeton de réinitialisation de mot de passe";
+"password_reset_request_instruction" = "Entrez votre courriel ou nom d'usager pour avoir le jeton de réinitialisation de mot de passe envoyé au courriel du compte";
+"password_reset_token" = "Jeton de réinitialisation";
+"password_reset_token_sent" = "Un jeton de réinitialisation a été envoyé à l'adresse fournie, si celle-ci a un compte associé";
+"password_reset_newpassword" = "Entrez votre nouveau mot de passe";
 
-"popup_account_success" = "Succès!";
+"open_settings" = "Ouvrir les réglages pour cette application";
+
 "popup_account_password_changed" = "Mot de passe changé avec succès";
 "popup_account_message" = "Informations de compte mises à jour";
 "popup_account_deleted" = "Votre compte a été supprimé";
-"popup_warning" = "Avertissement";
 "popup_close_account_message" = "Cette action fermera votre compte";
+"popup_logout_message" = "Vous êtes sur le point de vous déconnecter";
 "popup_error" = "Erreur";
+"popup_error_generic_message" = "Une erreur est survenue";
+"popup_about_message %@ %@" = "À propos de cette appplication\n\nVersion %@ - %@";
 
 "createUserError" = "Erreur de création de compte";
 "loginError" = "Erreur de connexion";

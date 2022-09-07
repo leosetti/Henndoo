@@ -10,18 +10,19 @@ import SwiftUI
 struct MainView: View {
     var homelabel: LocalizedStringKey = "home"
     var peofilelabel: LocalizedStringKey = "profile"
+    @State var selectedTab = "Home"
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
                     Label(homelabel, systemImage: "house")
-                }
+                }.tag("Home")
 
             AccountView()
                 .tabItem {
                     Label(peofilelabel, systemImage: "person.crop.circle")
-                }
+                }.tag("Account")
         }
     }
 }

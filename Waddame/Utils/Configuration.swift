@@ -10,12 +10,20 @@ enum Env: String {
     case Dev = "dev"
     case Testflight = "testflight"
     case Release = "release"
+    
+    var name: String {
+        switch self {
+        case .Dev: return "DEV"
+        case .Testflight: return "Testflight"
+        case .Release: return "RELEASE"
+        }
+    }
 
     var apiURL: String {
         switch self {
         case .Dev: return "http://local.waddame.ca:3900/api/"
-        case .Testflight: return "https://staging-api.myservice.com"
-        case .Release: return "https://api.myservice.com"
+        case .Testflight: return "https://dev.waddame.ca/api/"
+        case .Release: return "https://waddame.ca/api/"
         }
     }
 }

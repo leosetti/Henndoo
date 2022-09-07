@@ -20,37 +20,47 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 if userObject.user != nil {
                     AccountText(user: userObject.user!)
                     
-                    if viewRouter.currentScreen != .account {
-                        NavigationLink(destination: EditProfileView(), isActive: self.$isNavLinkActive) {
-                            EditButtonView()
-                        }
+                    Button(action: {
+                        openSettings()
+                    }) {
+                        InfoLinkContent()
                     }
                     
-                }
-                Button(action: {
-                    userManager.logoutUser()
-                    viewRouter.currentScreen = .login
-                }) {
-                    LogoutButtonContent()
-                }
-                Button(action: {
-                    popUpObject.title = "popup_warning"
-                    popUpObject.message = "popup_close_account_message"
-                    popUpObject.show.toggle()
-                    popUpObject.handler = {
-                        deleteAccount()
+                    if viewRouter.currentScreen != .account {
+                        NavView(content: {EditProfileView()}, text: editlabel, type: .button, isActive: self.isNavLinkActive)
                     }
-                }) {
-                    CloseAccountContent()
+                
+                    Button(action: {
+                        popUpObject.type = .warning
+                        popUpObject.message = "popup_logout_message"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                            userManager.logoutUser()
+                            viewRouter.currentScreen = .login
+                        }
+                    }) {
+                        GenericButtonView(label: "logout_action")
+                    }
+                    Button(action: {
+                        popUpObject.type = .warning
+                        popUpObject.message = "popup_close_account_message"
+                        popUpObject.show.toggle()
+                        popUpObject.handler = {
+                            deleteAccount()
+                        }
+                    }) {
+                        CloseAccountContent()
+                    }
                 }
             }
             .padding()
             .onAppear(){
-                viewRouter.currentScreen = .main
+                if viewRouter.currentScreen != .account {
+                    viewRouter.currentScreen = .main
+                }
                 userManager.getUser(withID: "self", then: { result in
                     switch result {
                         case .success(let userFromResult):
@@ -65,6 +75,10 @@ struct AccountView: View {
         }.environmentObject(userObject)
     }
     
+    private func openSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
     private func deleteAccount() {
         if AppUtil.isInDebugMode {
             print("Deleting account!")
@@ -77,7 +91,7 @@ struct AccountView: View {
                     print("Account deleted")
                 }
                 DispatchQueue.main.async() {
-                    popUpObject.title = "popup_account_success"
+                    popUpObject.type = .success
                     popUpObject.message = "popup_account_deleted"
                     popUpObject.handler = {}
                     popUpObject.show.toggle()
@@ -102,6 +116,15 @@ struct AccountView_Previews: PreviewProvider {
     }
 }
 
+fileprivate struct InfoLinkContent: View {
+    var label: LocalizedStringKey = "open_settings"
+    
+    var body: some View {
+        Text(label)
+            .padding()
+    }
+}
+
 fileprivate struct AccountText: View {
     var user: User
     
@@ -120,36 +143,6 @@ fileprivate struct AccountText: View {
         Text(user.email)
             .font(.body)
             .padding(.bottom, 20)
-    }
-}
-
-fileprivate struct EditButtonView: View {
-    var label: LocalizedStringKey = "edit_profile"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
-    }
-}
-
-fileprivate struct LogoutButtonContent: View {
-    var label: LocalizedStringKey = "logout_action"
-    
-    var body: some View {
-        Text(label)
-            .textCase(.uppercase)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(Color.green)
-            .cornerRadius(15.0)
     }
 }
 
