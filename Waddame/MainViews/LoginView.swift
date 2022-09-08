@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var popUpObject: PopUpObject
     @StateObject private var userObject = UserObject()
@@ -34,9 +36,10 @@ struct LoginView: View {
                     }
                     LoginText()
                     WelcomeImage()
-                    if viewRouter.currentScreen == .resetPassword {
-                        NavView(content: {ResetPasswordView(isActive: false)}, text: resetlabel, isActive: true)
-                    }else{
+                    switch viewRouter.currentScreen {
+                    case .resetPassword(token: let tk) :
+                        NavView(content: {ResetPasswordView(isActive: false, token:tk)}, text: resetlabel, isActive: true)
+                    default:
                         NavView(content: {ResetPasswordView()}, text: resetlabel)
                     }
                     LoginForm()
@@ -44,6 +47,11 @@ struct LoginView: View {
                 }.padding()
             }
         }.environmentObject(userObject)
+        /*.onChange(of: scenePhase) { newPhase in
+            if AppUtil.isInDebugMode {
+                print("LoginView new phase is \(newPhase), viewRouter.currentScreen = \(viewRouter.currentScreen)")
+            }
+        }*/
     }
 }
 

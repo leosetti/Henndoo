@@ -73,7 +73,7 @@ fileprivate struct ResetForm: View {
                                     popUpObject.message = "password_reset_token_sent"
                                     popUpObject.show.toggle()
                                     popUpObject.handler = {
-                                        viewRouter.currentScreen = .resetPassword
+                                        viewRouter.currentScreen = .resetPassword(token: "")
                                     }
                                 }
                             }

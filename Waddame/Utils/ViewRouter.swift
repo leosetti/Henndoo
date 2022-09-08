@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-enum Screen {
+enum Screen: Equatable {
     case login
     case main
     case account
-    case resetPassword
+    case resetPassword(token: String)
 }
 
 class ViewRouter: ObservableObject {
