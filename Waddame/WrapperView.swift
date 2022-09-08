@@ -17,6 +17,7 @@ struct WrapperView: View {
     @State private var logged: Bool?
     @State private var showPopUp: Bool = false
     @State private var shortLivedSession: Bool = false
+    @State private var deepLinkValue: Screen?
     
     var loadinglabel: LocalizedStringKey = "loading"
     var body: some View {
@@ -26,15 +27,14 @@ struct WrapperView: View {
                     switch viewRouter.currentScreen {
                     case .login:
                         LoginView()
-                    case .resetPassword:
+                    case .resetPassword(token: _):
                         LoginView()
                     case .account:
                         MainView(selectedTab: "Account")
                     default:
                         MainView()
                     }
-                }
-                else {
+                } else {
                     Text(loadinglabel)
                 }
             }
@@ -44,6 +44,10 @@ struct WrapperView: View {
                 print("WrapperView loaded")
             }
         }.onChange(of: scenePhase) { newPhase in
+            if AppUtil.isInDebugMode {
+                print("New phase is \(newPhase)")
+            }
+            
             switch newPhase {
                 case .active :
                     if AppUtil.isInDebugMode {
@@ -62,10 +66,14 @@ struct WrapperView: View {
                 default :
                     break
             }
-            
+        }
+        .onOpenURL { url in
             if AppUtil.isInDebugMode {
-                print("New phase is \(newPhase)")
+                print("onOpenURL url = \(url)")
             }
+            let deeplinkManager = DeeplinkManager()
+            let deeplink = deeplinkManager.manage(url: url)
+            self.deepLinkValue = deeplink
         }
         .environmentObject(userLoader)
         .environmentObject(viewRouter)
@@ -100,39 +108,49 @@ struct WrapperView: View {
     }
     
     private func handleActive() {
-        logged = nil
-        validateUserToken() {
-            value in
-            
+        if AppUtil.isInDebugMode {
+            print("Handle Active")
+        }
+        if let dl = deepLinkValue {
             if AppUtil.isInDebugMode {
-                print("Token valid = \(value)")
+                print("deepLinkValue = \(dl)")
             }
-            if value {
-                userLoader.findUser(id: "self") {
-                    value in logged = value
-                    if(value){
-                        if let name = shortcutItemToProcess?.userInfo?["name"] as? String {
-                            if AppUtil.isInDebugMode {
-                                print("Shortcut name = \(name)")
-                            }
-                            switch name {
-                            case "profile" :
-                                viewRouter.currentScreen = .account
-                                break
-                            default :
-                                viewRouter.currentScreen = .main
-                                break
-                            }
-                        } else{
-                            viewRouter.currentScreen = .main
-                        }
-                    }else{
-                        viewRouter.currentScreen = .login
-                    }
+            logged = false
+            viewRouter.currentScreen = dl
+        } else {
+            logged = nil
+            validateUserToken() {
+                value in
+                if AppUtil.isInDebugMode {
+                    print("Token valid = \(value)")
                 }
-            }else{
-                logged = false
-                viewRouter.currentScreen = .login
+                if value {
+                    userLoader.findUser(id: "self") {
+                        value in logged = value
+                        if(value){
+                            if let name = shortcutItemToProcess?.userInfo?["name"] as? String {
+                                if AppUtil.isInDebugMode {
+                                    print("Shortcut name = \(name)")
+                                }
+                                switch name {
+                                case "profile" :
+                                    viewRouter.currentScreen = .account
+                                    break
+                                default :
+                                    viewRouter.currentScreen = .main
+                                    break
+                                }
+                            } else{
+                                viewRouter.currentScreen = .main
+                            }
+                        }else{
+                            viewRouter.currentScreen = .login
+                        }
+                    }
+                }else{
+                    logged = false
+                    viewRouter.currentScreen = .login
+                }
             }
         }
     }
