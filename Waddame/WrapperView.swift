@@ -10,7 +10,7 @@ import SwiftUI
 struct WrapperView: View {
     @Environment(\.scenePhase) var scenePhase
 
-    @StateObject var viewRouter: ViewRouter
+    @StateObject var viewRouter = ViewRouter()
     @StateObject var userLoader = UserLoader()
     @StateObject var popUpObject = PopUpObject()
     
