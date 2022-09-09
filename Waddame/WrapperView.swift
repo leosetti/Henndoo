@@ -61,6 +61,7 @@ struct WrapperView: View {
                     if AppUtil.isInDebugMode {
                         print("App in Back ground")
                     }
+                    logged = nil
                     addQuickActions()
                 break
                 default :
@@ -111,6 +112,7 @@ struct WrapperView: View {
         if AppUtil.isInDebugMode {
             print("Handle Active")
         }
+        logged = nil
         if let dl = deepLinkValue {
             if AppUtil.isInDebugMode {
                 print("deepLinkValue = \(dl)")
@@ -118,7 +120,6 @@ struct WrapperView: View {
             logged = false
             viewRouter.currentScreen = dl
         } else {
-            logged = nil
             validateUserToken() {
                 value in
                 if AppUtil.isInDebugMode {
